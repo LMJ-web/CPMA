@@ -1,0 +1,1456 @@
+﻿@{
+    ViewBag.Title = "个人信息中心";
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Cache-Control" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+
+    <link rel="stylesheet" type="text/css" href="~/PageUI/MyInfoIndexUi/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/layui/css/layui.css">
+    <link rel="stylesheet" type="text/css" href="~/PageUI/MyInfoIndexUi/css/style.css" />
+
+    <script src="~/PageUI/MyInfoIndexUi/js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="~/PageUI/MyInfoIndexUi/js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
+    <title>@ViewBag.Title</title>
+
+    <!--[if IE]>
+        <!--[if IE 7]><link rel="stylesheet" type="text/css" href="~/PageUI/UserInfoIndex/css/ie7.css">
+    <![endif]-->
+    <!--用户界面-->
+    <link rel="stylesheet" type="text/css" href="~/PageUI/UserInfoIndex/css/jiazaitoubu.css">
+    <link rel="stylesheet" type="text/css" href="~/PageUI/UserInfoIndex/css/css.css">
+
+    <link rel="stylesheet" type="text/css" href="~/PageUI/UserInfoIndex/css/center.css">
+    <script src="~/PageUI/UserInfoIndex/js/index2.js"></script>
+
+    <!--城市联动-->
+    <link rel="stylesheet" type="text/css" href="~/PageUI/UserInfoIndex/city/city.css">
+    <script src="~/PageUI/UserInfoIndex/city/Popt.js"></script>
+    <script src="~/PageUI/UserInfoIndex/city/cityJson.js"></script>
+    <script src="~/PageUI/UserInfoIndex/city/citySet.js"></script>
+
+    <!--分页Table-->
+    <link rel="stylesheet" type="text/css" href="http://cdn.bootcss.com/font-awesome/4.6.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="~/PageUI/FYTable/dist/css/bc.grid-1.0.0.min.css" />
+    <script src="~/PageUI/FYTable/js/bc.grid-1.0.0.min.js"></script>
+
+    <!--开关样式-->
+    <link href="~/Scripts/bootstrapSwitch.css" rel="stylesheet" />
+
+    <!--流加载-->
+    <link href="~/PageUI/WaterfallDataUi/css/base.css" rel="stylesheet" type="text/css" />
+    <link href="~/PageUI/WaterfallDataUi/css/index.css" rel="stylesheet" type="text/css" />
+    <style>
+        ul a {
+            /*设置导航字体大小*/
+            font-size: 18px;
+        }
+
+        .zp_nrm_r em {
+            width: 80px;
+        }
+    </style>
+</head>
+<body>
+    <div id="UInfoDiv">
+        <!--当前位置-->
+        <div class="now_positionm">
+            @*<a >首页></a><a >个人中心</a>*@
+        </div>
+        <!--centers-->
+        <div class="centers_m">
+            <!--清除浮动-->
+            <div class="clear_sm"></div>
+            <!--left-->
+            <div class="centers_ml layer-anim layui-anim-upbit">
+                <!--头像-->
+                @*<div class="center_header">
+            <a ><img src="~/PageUI/UserInfoIndex/images/weizh.png" /></a>
+            <em ><a name="username" >无名氏</a></em>
+            </div>*@
+                <!--列表go-->
+                <div class="centers_listm layer-anim layui-anim-fadein ">
+                    <div class="centers_listm_one">
+                        <img src="~/PageUI/UserInfoIndex/images/zshy.png" />
+                        <em>个人信息中心</em>
+                    </div>
+                    <!--一条开始-->
+                    <div class="centers_listm_one_in">
+                        <img src="~/PageUI/UserInfoIndex/images/shezhi.png" />
+                        <em>资料管理</em>
+                        <b></b>
+                    </div>
+                    <span class="gjszmdm">
+                        <a href="javascript:#;" class="center_in_self" onclick="SwitchModel('ZLXX',this);" id="a_ZLXX"><font>资料信息</font></a>
+                        <a href="javascript:#;" class="center_in_self" onclick="SwitchModel('YHKGL', this)"><font>银行卡管理</font></a>
+                    </span>
+                    <!--一条开始-->
+                    <div class="centers_listm_one_in" id="MyShopModel">
+                        <img src="~/PageUI/UserInfoIndex/images/shangpu.jpg" />
+                        <em>我的商店</em>
+                        <b></b>
+                    </div>
+                    <span class="gjszmdm">
+                        <a href="javascript:#;" class="center_in_self" onclick="SwitchModel('WDSD_SPXX', this); ReadShopInfo();"><font>商店信息管理</font></a>
+                        <a href="javascript:#;" class="center_in_self" onclick="SwitchModel('WDSD_SDSP', this); GetMyGoodsAndSetFY(); waterfall_FirstInState = 0;"><font>商店商品管理</font></a>
+                        <a href="javascript:#;" class="center_in_self" onclick="SwitchModel('WDSD_KHYYXX', this); GetUserYYInfo();" id="KHYYXX_Model"><font>客戶预约信息</font></a>
+                        <a class="center_in_self" onclick="SwitchModel('WDSD_KHYYXX_Finished', this); GetUserYYFinishInfo();"><font>已完成的客戶预约信息</font></a>
+                    </span>
+                    <!--一条开始-->
+                    <div class="centers_listm_one_in">
+                        <img src="~/PageUI/UserInfoIndex/images/ddgl.png" />
+                        <em>订单管理</em>
+                        <b></b>
+                    </div>
+                    <span class="gjszmdm">
+                        <a href="javascript:#;" class="center_in_self" onclick="SwitchModel('DDGL_WDDD', this); GetMyOrder();" id="a_DDGL_WDDD"><font>我的订单</font></a>
+                        <a href="javascript:#;" class="center_in_self" onclick="SwitchModel('DDGL_WDYY', this); GetWDYYInfo();" id="a_DDGL_WDYY"><font>我的预约信息</font></a>
+                        <a href="javascript:#;" class="center_in_self" onclick="SwitchModel('DDGL_YWCDYY', this); GetWDYYFinishInfo();" id="a_WOYY_Finish"><font>已完成的预约信息</font></a>
+                        @*<a  class="center_in_self" onclick="SwitchModel('DDGL_WDDD', this)"><font>评价订单</font></a>
+                    <a  class="center_in_self" onclick="SwitchModel('DDTS', this)"><font>订单投诉</font></a>*@
+                    </span>
+                    <!--一条开始-->
+                    <div class="centers_listm_one_in">
+                        <img src="~/PageUI/UserInfoIndex/images/wdssc.png" />
+                        <em>收藏管理</em>
+                        <b></b>
+                    </div>
+                    <span class="gjszmdm">
+                        <a href="javascript:#;" class="center_in_self" onclick="SwitchModel('SPSC', this); GetFYColShop_First(1, 10);" id="a_SPSC"><font>商店收藏</font></a>
+                        <a href="javascript:#;" class="center_in_self" onclick="SwitchModel('HPSC', this); GetFYColGoods_First(1,10)" id="a_DZCPSC"><font>商品收藏</font></a>
+                    </span>
+                    <!--一条开始-->
+                    <div class="centers_listm_one_in">
+                        <img src="~/PageUI/UserInfoIndex/images/suo.png" />
+                        <em>账户安全</em>
+                        <b></b>
+                    </div>
+                    <span class="gjszmdm">
+                        <a href="javascript:#;" class="center_in_self" onclick="SwitchModel('ZHAQ', this)"><font>账户安全</font></a>
+                        <a href="javascript:#;" class="center_in_self" onclick="SwitchModel('ZHYE', this)"><font>账户余额</font></a>
+                        <a href="javascript:#;" class="center_in_self" onclick="SwitchModel('WDJF', this)"><font>我的积分</font></a>
+                        <a href="javascript:#;" class="center_in_self" onclick="SwitchModel('JFDH', this)"><font>积分兑换</font></a>
+                        @*<a  class="center_in_self" onclick="SwitchModel('WDJY', this)"><font>我的经验</font></a>*@
+                        <a class="center_in_self" onclick="SwitchModel('WDYHJ', this)"><font>我的优惠卷</font></a>
+                    </span>
+
+                    <!--一条开始-->
+                    <div class="centers_listm_one_in">
+                        <img src="~/PageUI/UserInfoIndex/images/myfridend.png" />
+                        <em>好友管理</em>
+                        <b></b>
+                    </div>
+                    <span class="gjszmdm">
+                        <a href="javascript:#;" class="center_in_self" onclick="SwitchModel('XTXX', this)"><font>我的消息</font></a>
+                        <a href="javascript:#;" class="center_in_self" onclick="SwitchModel('WDHY', this)"><font>我的好友</font></a>
+                    </span>
+                </div>
+                <script type="text/javascript">
+                    $(function () {
+                        //第一步都得写这个
+                        $(".centers_listm_one_in").click(function () {
+                            $(this).next(".gjszmdm").slideToggle().siblings("gjszmdm").slideUp()
+                        });
+                    })
+                </script>
+            </div>
+            <!--right-->
+            <div class="centers_mr layer-anim layui-anim-upbit">
+                <h1 class="welcom_tm">您上次登录时间为<a href="javascript:0" name="logintime">无</a></h1>
+                <!--一条开始-->
+                <div class="public_m1" id="ZLXX">
+                    <div style="height:200px;">
+                        <!--left-->
+                        <div class="public_m1_l">
+                            <!--top-->
+                            <div class="public_m1_top">
+                                <ul>
+                                    <li>
+                                        <img src="~/PageUI/UserInfoIndex/images/jif.png" />
+                                        <em>205分</em>
+                                        <p>我的积分</p>
+                                    </li>
+                                    <li>
+                                        <img src="~/PageUI/UserInfoIndex/images/yue.png" />
+                                        <em><a name="money"></a></em>
+                                        <p>账户余额</p>
+                                    </li>
+                                    <li>
+                                        <img src="~/PageUI/UserInfoIndex/images/kouw.png" />
+                                        <em>偏辣</em>
+                                        <p>口味偏好</p>
+                                    </li>
+                                    @*<li>
+                                <img src="~/PageUI/UserInfoIndex/images/weizh.png" />
+                                <em><a name="city"></a></em>
+                                <p>所在位置</p>
+                                </li>*@
+                                    <li>
+                                        <img src="~/PageUI/UserInfoIndex/images/dengj.png" />
+                                        <em>Lv1</em>
+                                        <p>会员等级</p>
+                                    </li>
+                                    <li>
+                                        <img src="~/PageUI/UserInfoIndex/images/shouj.png" />
+                                        <em><a name="mobilephone"><em>未设置</em></a></em>
+                                        <p>手机绑定</p>
+                                    </li>
+                                    <li>
+                                        <img src="~/PageUI/UserInfoIndex/images/youx.png" />
+                                        <em><a name="email"><em>未设置</em></a></em>
+                                        <p>邮箱绑定</p>
+                                    </li>
+                                </ul>
+                            </div>
+                            <!--bottom-->
+                            <div class="public_m1_bottom">
+                                <h4>账户安全<font>低</font></h4>
+                                <span>
+                                    <p style="width:36%"></p>
+                                </span>
+                                <a>立即提升</a>
+                            </div>
+                        </div>
+                        <!--right-->
+                        <div class="public_m1_r">
+                            <script src="~/PageUI/UserInfoIndex/js/jquery.luara.0.0.1.min.js"></script>
+                            <div class="example1">
+                                <ul>
+                                    <li><img src="~/PageUI/UserInfoIndex/images/uinfo_adv1.jpg" style="background:100%" /></li>
+                                    <li><img src="~/PageUI/UserInfoIndex/images/uinfo_adv2.jpg" style="background:100%" /></li>
+                                    <li><img src="~/PageUI/UserInfoIndex/images/uinfo_adv3.jpg" style="background:100%" /></li>
+                                    <li><img src="~/PageUI/UserInfoIndex/images/cross_fire.jpg" style="background:100%" /></li>
+                                </ul>
+                                <ol>
+                                    <li></li>
+                                    <li></li>
+                                    <li></li>
+                                    <li></li>
+                                </ol>
+                            </div>
+                            <script>
+                                $(function () {
+                                    $(".example1").luara({ width: "352", height: "175", interval: 5000, selected: "seleted", deriction: "top" });
+                                });
+                            </script>
+                        </div>
+                    </div>
+                    <div class="public_m2">资料信息</div>
+                    <!--照片和内容-->
+                    <div class="zp_nrm">
+                        <!--left-->
+                        <div class="zp_nrm_l">
+                            <img src="~/PageUI/UserInfoIndex/images/weizh.png" id="HeadImgSource_U" class="img-rounded" />
+                        </div>
+                        <!-- 模态框（Modal） -->
+                        <div class="modal fade" id="HImgModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                            &times;
+                                        </button>
+                                        
+                                    </div>
+                                    <div class="modal-body">
+                                        <form action="/User/UploadFile?UserName=@ViewBag.UserName" method="post" enctype="multipart/form-data">
+                                            <input type="file" name="file" />
+                                            <input type="submit" value="上传" id="UpdateHImgBtn" hidden />
+                                        </form>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal" onclick="$('#UpdateHImgBtn').click();">
+                                            上传
+                                        </button>
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">
+                                            关闭
+                                        </button>
+                                    </div>
+                                </div><!-- /.modal-content -->
+                            </div><!-- /.modal -->
+                        </div>
+                        <!--right-->
+                        <div class="zp_nrm_r">
+                            <p><em>账号：</em><i id="i_username" style="color:blue;"></i>(已加密,请勿给别人看到)</p>
+                            <p><em>昵称：</em><input id="i_nick" value="" type="text" style="border:1px solid #eaeaea;line-height:30px;" /></p>
+                            <p><em>真实名字：</em><i id="i_name">无名氏</i><a onclick="SwitchModel('SMRZ', this)">实名认证</a></p>
+                            <p><em>邮箱：</em><i id="i_email">未设置</i><a onclick="SwitchModel('YXBD', this)">立即设置</a></p>
+                            <p><em>手机号：</em><i id="i_mobilephone">15554465535</i><a onclick="SwitchModel('SJBD', this)">立即绑定</a></p>
+                            <p>
+                                <em>性别：</em>
+                                <input type="radio" name="sex" class="sex_m" value="保密"><i>保密</i>
+                                <input type="radio" name="sex" class="sex_m" value="男"><i>男</i>
+                                <input type="radio" name="sex" class="sex_m" value="女"><i>女</i>
+                            </p>
+                            <p>
+                                <em>所在地：</em>
+                                <!--插入插件-->
+                                <input type="text" id="city" style="border: 1px solid #eaeaea; text-align: center; color:#343434; line-height: 30px;float:left; margin-top: 15px;" value="请输入地址范围..." />
+                                <script type="text/javascript">
+                                    $("#city").click(function (e) {
+                                        SelCity(this, e);
+                                    });
+                                </script>
+                            </p>
+                            <div class="layui-form">
+                                <div class="layui-form-item">
+                                    <div class="layui-inline" style="padding-top:15px;">
+                                        @*<label class="layui-form-label" style="padding:0px;padding-top:10px;width:40px;">生日：</label>*@
+                                        <em style="font-size:14px;">生日：</em>
+                                        <div class="layui-input-inline">
+                                            <input type="text" class="layui-input" id="i_birthday" placeholder="yyyy-MM-dd">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <a class="public_m3" onclick="ModifyUserInfos()">保存修改</a>
+                        </div>
+                    </div>
+                </div>
+                <!--一条开始-->
+                <div class="public_m1" id="YHKGL" hidden>
+                    <div class="public_m2">银行卡绑定</div>
+                    <!--提示信息-->
+                    <div class="tip_notem">
+                        <ul>
+                            <li>1.银行卡信息必须与账户信息一致</li>
+                            <li>2.为了您的方便，请尽量填写您常用的银行卡账号</li>
+                        </ul>
+                    </div>
+                    <div class="public_m4">
+                        <p><em>您当前的银行账号：</em><i>您还未设置银行卡信息</i></p>
+                        <p>
+                            <em>银行名称：</em>
+                            <select style=" height:23px; border:1px solid #eaeaea">
+                                <option>-请选择-</option>
+                                <option>中国工商银行</option>
+                            </select>
+                        </p>
+                        <p>
+                            <em>户主姓名：</em>
+                            <input type="text" style=" height:23px; border:1px solid #eaeaea; width:140px">
+                        </p>
+                        <p>
+                            <em>银行卡号：</em>
+                            <input type="text" style=" height:23px; border:1px solid #eaeaea; width:140px">
+                        </p>
+                        <p>
+                            <em>确认卡号：</em>
+                            <input type="text" style=" height:23px; border:1px solid #eaeaea; width:140px">
+                        </p>
+                        <p>
+                            <em>开户银行银行地点：</em>
+                            <input type="text" style=" height:23px; border:1px solid #eaeaea; width:140px;" value="这里放地点插件">
+                        </p>
+                        <p>
+                            <em>开户银行支行名称：</em>
+                            <select style=" height:23px; border:1px solid #eaeaea">
+                                <option>-请选择-</option>
+                                <option>中国工商银行</option>
+                            </select>
+                        </p>
+                        <p>
+                            <em>请输入手机验证码：</em>
+                            <input type="text" style=" height:23px; border:1px solid #eaeaea; width:140px">
+                            <a class="liji_fsm">发送</a>
+                            <i>注：若未绑定手机号码，请前往账户安全页面进行绑定</i>
+                        </p>
+                        <a class="public_m3">保存修改</a>
+                    </div>
+                </div>
+
+                @*订单管理*@
+                <!--一条开始-->  <!--我的订单-->
+                <div class="public_m1" id="DDGL_WDDD" hidden>
+                    <div class="public_m2">我的订单</div>
+                    <!--各种进度-->
+                    <div class="gezhong_jdm">
+                        <img src="~/PageUI/UserInfoIndex/images/jkkll.png" />
+                        <ul>
+                            <li>出货</li>
+                            <li>发货</li>
+                            <li>运送</li>
+                            <li>验收</li>
+                        </ul>
+                    </div>
+                    <!--各种信息-->
+                    @*<div class="gezhong_xxm">
+                        <ul>
+                            <li><em>商家：</em><a>木木小店</a></li>
+                            <li><em>订单号：</em><a>2016102111523538</a></li>
+                            <li><em>预约时间：</em><i>12:00-14:00</i></li>
+                            <li><em>订购热线：</em><i>7310237</i></li>
+                            <li><em>下单时间：</em><i>2016-10-21 11:52:38</i></li>
+                            <li><em>订单状态：</em><i>已取消</i></li>
+                            <li><em>订餐类型：</em><i>餐位订餐</i></li>
+                        </ul>
+                    </div>*@
+                    <!--订单信息-->
+                    <div class="public_m5">
+                        <div class="public_m5" id="DDGL_WDDD_Table" style="overflow-x: scroll;">
+                            <!--动态生成预约信息-->
+                        </div>
+                    </div>
+                    @*<!--位置信息-->
+                    <div class="weizhi_xxm">
+                        位置信息：<font>大厅11号桌</font>
+                    </div>
+                    <!--合计金额-->
+                    <div class="heji_jem">
+                        合计金额：<font>1038.00元</font>
+                    </div>
+                    <!--订餐留言-->
+                    <div class="dingcan_lym">
+                        <em>订餐留言：</em>
+                        <p>最佳答案：APP是英文Application(应用)的简称,由于iPhone智能手机的流行,现在的APP多指移动设备(包括平板电脑、手机、和其他移动设备)上的第三方应用程序。 目前比...</p>
+                    </div>*@
+                </div>
+                <!--一条开始-->  <!--我的预约信息-->
+                <div class="public_m1" id="DDGL_WDYY" hidden>
+                    <div class="public_m2">我的预约</div>
+                    <div class="public_m5" id="DDGL_WDYY_Table" style="overflow-x: scroll;">
+                        <!--动态生成预约信息-->
+                    </div>
+                </div>
+                <!--一条开始-->  <!--已完成的预约信息-->
+                <div class="public_m1" id="DDGL_YWCDYY" hidden>
+                    <div class="public_m2">已完成的预约</div>
+                  
+                    <div class="public_m5" id="DDGL_YWCDYY_Table" style="overflow-x: scroll;">
+                        <!--动态生成预约信息-->
+                    </div>
+                </div>
+
+                @*账户安全*@
+                <!--一条开始-->
+                <div class="public_m1" id="ZHAQ" hidden>
+                    <div class="public_m2">账户安全</div>
+                    <div class="public_m4">
+                        <p><em>您当前的安全等级：</em><i style="color:#fa3b4a">高</i></p>
+                    </div>
+                    <!--各种设置-->
+                    <div class="gezhong_szm">
+                        <!--一条开始-->
+                        <div class="gezhong_szm_in">
+                            <b style=" background:url(~/PageUI/UserInfoIndex/images/fourm.png) no-repeat 0 0"></b>
+                            <span>登录密码<br><em>已设置</em></span>
+                            <p>安全性高的密码，可以使账户更安全。建议您定期更换密码。安全性高的密码，可以使账户更安全。建议您定期更换密码。安全性高的密码，可以使账户更安全。建议您定期更换密码。</p>
+                            <a onclick="SwitchModel('DLMMXG', this)">修改密码</a>
+                        </div>
+                        <!--一条开始-->
+                        <div class="gezhong_szm_in">
+                            <b style=" background:url(~/PageUI/UserInfoIndex/images/fourm.png) no-repeat 0 -50px"></b>
+                            <span>邮箱绑定<br><em>已设置</em></span>
+                            <p>进行邮箱验证后，可用于接收敏感操作的身份验证信息，以及订阅更优惠商品的促销邮件。</p>
+                            <a onclick="SwitchModel('YXBD', this)">绑定邮箱</a>
+                        </div>
+                        <!--一条开始-->
+                        <div class="gezhong_szm_in">
+                            <b style=" background:url(~/PageUI/UserInfoIndex/images/fourm.png) no-repeat 0 -100px"></b>
+                            <span>手机绑定<br><em>已设置</em></span>
+                            <p>进行手机验证后，可用于接收敏感操作的身份验证信息，以及进行积分消费的验证确认，非常有助于保护您的账号和账户财产安全。</p>
+                            <a onclick="SwitchModel('SJBD', this)">修改手机</a>
+                        </div>
+                        <!--一条开始-->
+                        <div class="gezhong_szm_in">
+                            <b style=" background:url(~/PageUI/UserInfoIndex/images/fourm.png) no-repeat 0 -150px"></b>
+                            <span>支付密码<br><em>已设置</em></span>
+                            <p>设置支付密码后，在使用账户中余额时，需输入支付密码。</p>
+                            <a onclick="SwitchModel('JYMMXG', this)">修改密码</a>
+                        </div>
+                    </div>
+                </div>
+                <!--一条开始-->
+                <div class="public_m1" id="SJBD" hidden>
+                    <div class="public_m2">绑定手机</div>
+                    <!--提示信息-->
+                    <div class="tip_notem">
+                        <ul>
+                            <li>1. 绑定手机后可直接通过短信接受安全验证等重要操作。</li>
+                            <li>2. 更改手机时，请通过安全验证后重新输入新手机号码绑定。</li>
+                            <li>3. 收到安全验证码后，请在30分钟内完成验证。</li>
+                        </ul>
+                    </div>
+                    <div class="public_m4">
+                        <p>
+                            <em>绑定手机号码：</em>
+                            <input type="text" style=" height:23px; border:1px solid #eaeaea; width:140px" id="input_mobilep">
+                            <input type="button" id="btnsj" class="btn_mfyzm" value="获取验证码" style=" border:1px solid #c8c8c8; margin-left:6px" />
+                        </p>
+                        <p>
+                            <em>收到的验证码：</em>
+                            <input type="text" style=" height:23px; border:1px solid #eaeaea; width:140px">
+                        </p>
+                        <a class="public_m3" onclick="ModifyPhone()">立即绑定</a>
+                    </div>
+                </div>
+                <!--一条开始-->
+                <div class="public_m1" id="YXBD" hidden>
+                    <div class="public_m2">绑定邮箱</div>
+                    <!--提示信息-->
+                    <div class="tip_notem">
+                        <ul>
+                            <li>1. 此邮箱将接收密码找回，订单通知等敏感性安全服务及提醒使用，请务必填写正确地址。</li>
+                            <li>2. 设置提交后，系统将自动发送验证邮件到您绑定的信箱，您需在24小时内登录邮箱并完成验证。</li>
+                            <li>3. 更改邮箱时，请通过安全验证后重新输入新邮箱地址绑定。</li>
+                        </ul>
+                    </div>
+                    <div class="public_m4">
+                        <p>
+                            <em>绑定邮箱地址：</em>
+                            <input type="text" style=" height:23px; border:1px solid #eaeaea; width:140px" id="input_email">
+                        </p>
+                        <a class="public_m3" onclick="ModifyEmail()">发送验证邮件</a>
+                    </div>
+                </div>
+                <!--一条开始-->
+                <div class="public_m1" id="SMRZ" hidden>
+                    <div class="public_m2">实名认证</div>
+                    <!--提示信息-->
+                    <div class="tip_notem">
+                        <ul>
+                            <li>1. 我们将对您的信息绝对保密</li>
+                            <li>2. 认证可以提高信誉</li>
+                            <li>3. 认证完全免费，认证成功后不可修改</li>
+                        </ul>
+                    </div>
+                    <div class="public_m4">
+                        <p>
+                            <em>真实姓名：</em>
+                            <input type="text" style=" height:23px; border:1px solid #eaeaea; width:140px" id="input_name">
+                        </p>
+                        <p>
+                            <em>身份证号：</em>
+                            <input type="text" style=" height:23px; border:1px solid #eaeaea; width:140px" id="input_idcard">
+                        </p>
+                        <p>
+                            <em>上传身份证：</em>
+                            <input type="file" style=" height:28px; border:1px solid #eaeaea; width:170px">
+                        </p>
+                        <a class="public_m3" onclick="SureRealNameVail()">提交认证</a>
+                    </div>
+                </div>
+                <!--一条开始-->
+                <div class="public_m1" id="DLMMXG" hidden>
+                    <div class="public_m2">登录密码修改</div>
+                    <!--提示信息-->
+                    <div class="tip_notem">
+                        <ul>
+                            <li>1.请牢记登录密码</li>
+                            <li>2.如果丢失密码，可以通过绑定的手机或邮箱找到</li>
+                        </ul>
+                    </div>
+                    <div class="public_m4">
+                        <p>
+                            <em>原密码：</em>
+                            <input type="password" style=" height:23px; border:1px solid #eaeaea; width:140px" id="oldpassword" data-toggle="tooltip" data-placement="right" title="密码不能为空" onmouseover="ColseTip('oldpassword')">
+                        </p>
+                        <p>
+                            <em>新的密码：</em>
+                            <input type="password" style=" height:23px; border:1px solid #eaeaea; width:140px" id="newpassword1" data-toggle="tooltip" data-placement="right" title="密码不能为空" onmouseover="ColseTip('newpassword1')">
+                        </p>
+                        <p>
+                            <em>确认密码：</em>
+                            <input type="password" style=" height:23px; border:1px solid #eaeaea; width:140px" id="newpassword2" data-toggle="tooltip" data-placement="right" title="密码不能为空" onmouseover="ColseTip('newpassword2')">
+                        </p>
+                        <a class="public_m3" onclick="ModifyPassword()">确认修改</a>
+                    </div>
+                </div>
+                <!--一条开始-->
+                <div class="public_m1" id="JYMMXG" hidden>
+                    <div class="public_m2">交易密码修改</div>
+                    <!--提示信息-->
+                    <div class="tip_notem">
+                        <ul>
+                            <li>1.请牢记登录密码</li>
+                            <li>2.如果丢失密码，可以通过绑定的手机或邮箱找到</li>
+                        </ul>
+                    </div>
+                    <div class="public_m4">
+                        <p>
+                            <em>原密码：</em>
+                            <input type="text" style=" height:23px; border:1px solid #eaeaea; width:140px">
+                        </p>
+                        <p>
+                            <em>验证码：</em>
+                            <input type="text" style=" height:23px; border:1px solid #eaeaea; width:140px">
+                            <input type="button" id="btnsj" class="btn_mfyzm" value="获取验证码" style=" border:1px solid #c8c8c8; margin-left:6px" />
+                        </p>
+                        <p>
+                            <em>新的密码：</em>
+                            <input type="text" style=" height:23px; border:1px solid #eaeaea; width:140px">
+                        </p>
+                        <p>
+                            <em>确认密码：</em>
+                            <input type="text" style=" height:23px; border:1px solid #eaeaea; width:140px">
+                        </p>
+                        <a class="public_m3">确认修改</a>
+                    </div>
+                </div>
+                <!--一条开始-->
+                <div class="public_m1" id="ZHYE" hidden>
+                    <div class="public_m2">账户余额</div>
+                    <!--账户余额-->
+                    <div class="zanghye_m">
+                        <em>可用余额：</em><i name="money" style="color:red;"></i>
+                        <em>冻结金额：</em><i>￥0.00</i>
+                        <em>累计赠送：</em><i>￥0.00</i>
+                    </div>
+                    <!--充值提现-->
+                    <div class="chongzhi_htxm">
+                        <a onclick="ShowRechargeMoney()" href="javascript:#">充值</a>
+                        <a href="javascript:#">提现</a>
+                        <a class="chakangd_m" href="javascript:#">查看更多</a>
+                    </div>
+                    <!--一个订单信息-->
+                    <div class="public_m5">
+                        <table border="0" cellspacing="0" cellpadding="0">
+                            <tbody>
+                                <tr style=" border-bottom:1px solid #000">
+                                    <th class="olist1">交易类型</th>
+                                    <th class="olist2">可用余额（元）</th>
+                                    <th class="olist3">变化金额（元）</th>
+                                    <th class="olist4">冻结金额（元）</th>
+                                    <th class="olist5">交易时间</th>
+                                    <th class="olist5">操作</th>
+                                </tr>
+                                <tr>
+                                    <td><a>余额充值</a></td>
+                                    <td>￥84.00</td>
+                                    <td>+1</td>
+                                    <td class="money">0</td>
+                                    <td>2016/06/06 20:30</td>
+                                    <td><a style=" margin-right:6px">查看</a><a>删除</a></td>
+                                </tr>
+                                <tr>
+                                    <td><a>余额充值</a></td>
+                                    <td>￥84.00</td>
+                                    <td>+1</td>
+                                    <td class="money">0</td>
+                                    <td>2016/06/06 20:30</td>
+                                    <td><a style=" margin-right:6px">查看</a><a>删除</a></td>
+                                </tr>
+                                <tr>
+                                    <td><a>余额充值</a></td>
+                                    <td>￥84.00</td>
+                                    <td>+1</td>
+                                    <td class="money">0</td>
+                                    <td>2016/06/06 20:30</td>
+                                    <td><a style=" margin-right:6px">查看</a><a>删除</a></td>
+                                </tr>
+                                <tr>
+                                    <td><a>余额充值</a></td>
+                                    <td>￥84.00</td>
+                                    <td>+1</td>
+                                    <td class="money">0</td>
+                                    <td>2016/06/06 20:30</td>
+                                    <td><a style=" margin-right:6px">查看</a><a>删除</a></td>
+                                </tr>
+                                <tr>
+                                    <td><a>余额充值</a></td>
+                                    <td>￥84.00</td>
+                                    <td>+1</td>
+                                    <td class="money">0</td>
+                                    <td>2016/06/06 20:30</td>
+                                    <td><a style=" margin-right:6px">查看</a><a>删除</a></td>
+                                </tr>
+                                <tr>
+                                    <td><a>余额充值</a></td>
+                                    <td>￥84.00</td>
+                                    <td>+1</td>
+                                    <td class="money">0</td>
+                                    <td>2016/06/06 20:30</td>
+                                    <td><a style=" margin-right:6px">查看</a><a>删除</a></td>
+                                </tr>
+                                <tr>
+                                    <td><a>余额充值</a></td>
+                                    <td>￥84.00</td>
+                                    <td>+1</td>
+                                    <td class="money">0</td>
+                                    <td>2016/06/06 20:30</td>
+                                    <td><a style=" margin-right:6px">查看</a><a>删除</a></td>
+                                </tr>
+                                <tr>
+                                    <td><a>余额充值</a></td>
+                                    <td>￥84.00</td>
+                                    <td>+1</td>
+                                    <td class="money">0</td>
+                                    <td>2016/06/06 20:30</td>
+                                    <td><a style=" margin-right:6px">查看</a><a>删除</a></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <!--翻页符号-->
+                    <div class="fanyefh_m">
+                        <a>上一页</a>
+                        <a class="addclass_m">1</a>
+                        <a>2</a>
+                        <a>3</a>
+                        <a>下一页</a>
+                    </div>
+                </div>
+
+                @*我的商店*@
+                <!--一条开始-->
+                <div class="public_m1" id="WDSD_SPXX" hidden>
+                    <div class="public_m2">商店信息管理</div>
+                    <ul class="nav nav-tabs">
+                        <li class="active" onclick="SwitchLi(this, 'DShopInfoForm');"><a>详细信息</a></li>
+                        <li onclick="SwitchLi(this,'UpFMImgForm')"><a>封面管理</a></li>
+                        <li onclick="SwitchLi(this,'UpTGImgForm')"><a>商店推广图管理</a></li>
+                    </ul>
+
+                    <div style="margin-top:20px;">
+                        <!--商家信息界面-->
+                        <form id="DShopInfoForm" class="layui-form layui-form-pane" style="padding-left:1px;" lay-filter="DShopInfoForm">
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">商店名</label>
+                                <div class="layui-input-inline">
+                                    <input type="text" name="ShopName" id="ShopName" lay-verify="required|shopName" placeholder="请输入商店名" autocomplete="off" class="layui-input">
+                                </div>
+                            </div>
+
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">联系人</label>
+                                <div class="layui-input-inline">
+                                    <input type="text" name="ShopContact" id="ShopContact" lay-verify="required" placeholder="请输入联系人" autocomplete="off" class="layui-input">
+                                </div>
+                            </div>
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">手机号码</label>
+                                <div class="layui-input-inline">
+                                    <input type="text" name="ShopPhone" id="ShopPhone" lay-verify="required|phone" placeholder="请输入手机号码" autocomplete="off" class="layui-input">
+                                </div>
+                            </div>
+                            <div class="layui-form-item">
+                                <div class="layui-inline">
+                                    <label class="layui-form-label">营业时间</label>
+                                    <div class="layui-input-inline" style="width: 100px;">
+                                        <input type="text" name="StartTime" id="StartTime" lay-verify="required" autocomplete="off" class="layui-input">
+                                    </div>
+                                    <div class="layui-form-mid">-</div>
+                                    <div class="layui-input-inline" style="width: 100px;">
+                                        <input type="text" name="EndTime" id="EndTime" lay-verify="required" autocomplete="off" class="layui-input">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="layui-form-item">
+                                <div class="layui-inline">
+                                    <label class="layui-form-label">价格</label>
+                                    <div class="layui-input-inline" style="width: 100px;">
+                                        <input type="text" name="MinPrice" id="MinPrice" placeholder="￥" lay-verify="required|number" autocomplete="off" class="layui-input">
+                                    </div>
+                                    <div class="layui-form-mid">-</div>
+                                    <div class="layui-input-inline" style="width: 100px;">
+                                        <input type="text" name="MaxPrice" id="MaxPrice" placeholder="￥" lay-verify="required|number" autocomplete="off" class="layui-input">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">商店地址</label>
+                                <!--插入插件-->
+                                <div class="layui-input-block">
+                                    <input type="text" id="ShopAddress" name="ShopAddress" value="请选择地区..." lay-verify="required" autocomplete="off" class="layui-input" />
+                                    <script type="text/javascript">
+                                        $("#ShopAddress").click(function (e) {
+                                            SelCity(this, e);
+                                        });
+                                    </script>
+                                </div>
+                            </div>
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">详细地址</label>
+                                <div class="layui-input-block">
+                                    <input type="text" name="ShopDAddress" id="ShopDAddress" autocomplete="off" placeholder="请输入商店地址" lay-verify="required" class="layui-input">
+                                </div>
+                            </div>
+
+                            <div class="layui-form-item layui-form-text">
+                                <label class="layui-form-label">商店介绍</label>
+                                <div class="layui-input-block">
+                                    <textarea placeholder="请输入内容" class="layui-textarea" id="ShopIntroduce"></textarea>
+                                </div>
+                            </div>
+                            <div class="layui-form-item" style="text-align:center">
+                                <button class="layui-btn layui-btn-normal" lay-submit lay-filter="ModifyShopInfo_Submit" id="ModifyShopBtn">修改</button>
+                                <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                            </div>
+                        </form>
+                        <!--商家封面上传界面-->
+                        <form class="layui-form layui-form-pane" action="" style="padding-left:1px;" id="UpFMImgForm" method="post" hidden>
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">封面图</label>
+                                <div class="layui-upload">
+                                    <button type="button" class="layui-btn layui-btn-normal" id="fmImgSeleBtn">封面图上传</button>
+                                    <div class="layui-upload-list">
+                                        <blockquote class="layui-elem-quote layui-quote-nm" style="margin-top: 10px;">
+                                            <img class="layui-upload-img" id="demo1" style="width:300px;height:300px;">
+                                            <p id="demoText"></p>
+                                            <div class="layui-upload-list" id="demo"></div>
+                                        </blockquote>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                        <!--商家推广图上传界面-->
+                        <form class="layui-form layui-form-pane" action="" style="padding-left:1px;" id="UpTGImgForm" method="post" hidden>
+                            <div id="TGUpLoadImg" class="demo"></div>
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">商店推广图</label>
+
+                                <div class="layui-upload">
+                                    <button type="button" class="layui-btn layui-btn-normal" id="tgImgSelBtn">选择多文件</button>
+                                    <div style="text-align:center">请一次性上传需要放到推广页的图片，最多只能传6张，之前上传的会给覆盖！</div>
+                                    <div class="layui-upload-list">
+                                        <table class="layui-table">
+                                            <thead>
+                                                <tr>
+                                                    <th>文件名</th>
+                                                    <th>大小</th>
+                                                    <th>状态</th>
+                                                    <th>操作</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="demoList"></tbody>
+                                        </table>
+                                    </div>
+                                    <button type="button" class="layui-btn layui-btn-normal" id="tgImgULBtn1" onclick="ClearShopTGImg()">开始上传</button>
+                                    <button type="button" class="layui-btn layui-btn-normal hide" id="tgImgULBtn">开始上传</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <!--一条开始-->
+                <div class="public_m1" id="WDSD_SDSP" hidden>
+                    <div class="public_m2">商品信息管理</div>
+                    <input type="button" class="layui-btn layui-btn-normal" value="添加商品" data-toggle="modal" data-target="#GoodsAddModel" />
+                    <br />
+                    <font color="gray">请滚动加载数据...</font>
+            
+                    <!--展示栏-->
+                    <div style="margin-top:20px;">
+                        <!-- 瀑布流样式开始 -->
+                        <div class="waterfull clearfloat" id="WaterfullDataDiv">
+                            <ul>
+                                @*动态添加商店|商品数据*@
+                            </ul>
+                        </div>
+                        <!-- loading按钮自己通过样式调整 -->
+                        <div id="imloading" style="width:150px;height:30px;line-height:30px;font-size:16px;text-align:center;border-radius:3px;opacity:0.7;background:#000;margin:10px auto 30px;color:#fff;display:none">
+                            <i class="layui-icon layui-icon-loading"></i> 加载更多中
+                        </div>
+                        <div style="text-align:center;">
+                            <ul class="pagination pagination-sm" id="Waterfall_FY_ul">
+                                @*动态添加数据*@
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <!--一条开始-->
+                <div class="public_m1" id="WDSD_KHYYXX" hidden>
+                    <div class="public_m2">客户预约信息</div>
+                    <!--预约信息-->
+                    <div class="public_m5" id="WDSD_KHYYXX_Table" style="overflow-x: scroll;">
+                        <!--动态生成预约信息-->
+                    </div>
+                </div>
+                <!--一条开始-->
+                <div class="public_m1" id="WDSD_KHYYXX_Finished" hidden>
+                    <div class="public_m2">已完成的客户预约信息</div>
+                    <!--预约信息-->
+                    <div class="public_m5" id="WDSD_KHYYXX_Finished_Table" style="overflow-x: scroll;">
+                        <!--动态生成预约信息-->
+                    </div>
+                </div>
+
+                @*收藏*@
+                <!--一条开始-->
+                <div class="public_m1" id="SPSC" hidden>
+                    <div class="public_m2">商店收藏</div>
+
+                    <div class="chongzhi_htxm">
+                        <a onclick="SwitchModel('SPSC', this); GetFYColShop_First(1, 10);">商店收藏</a>
+                        <a onclick="SwitchModel('HPSC', this); GetFYColGoods(1, 10)">商品收藏</a>
+                    </div>
+                    <!--全选和删除-->
+                    @*<div class="chice_allm">
+                    <input type="checkbox">
+                    <i>全选</i>
+                    <a href="javascript:void(0)">删除</a>
+                </div>*@
+                    <!--收藏开始-->
+                    <div class="rensw_bejm">
+                        <ul id="CollectShopList_ul" style="height:550px;">
+                            @*动态添加数据*@
+                        </ul>
+                        <div id="SCGL_SPSC_YM" style="text-align:center"></div>
+                    </div>
+                    <div class="public_m6">
+                        <img src="~/PageUI/UserInfoIndex/images/danmgydxm.png" />
+                    </div>
+                </div>
+                <!--一条开始-->
+                <div class="public_m1" id="HPSC" hidden>
+                    <div class="public_m2">商品收藏</div>
+                    <div class="chongzhi_htxm">
+                        <a onclick="SwitchModel('SPSC', this); GetFYColShop_First(1);">商店收藏</a>
+                        <a onclick="SwitchModel('HPSC', this); GetFYColGoods(1)">商品收藏</a>
+                    </div>
+                    <!--全选和删除-->
+                    @*<div class="chice_allm">
+                    <input type="checkbox">
+                    <i>全选</i>
+                    <a href="javascript:void(0)">删除</a>
+                </div>*@
+                    <!--收藏开始-->
+                    <div class="rensw_bejm">
+                        <ul id="CollectGoodsList_ul" style="height:510px;">
+                            @*动态添加数据*@
+                        </ul>
+                        <div id="SCGL_DZCPSC_YM" style="text-align:center"></div>
+                    </div>
+                    <!--当没有东西时的东西-->
+                    <div class="public_m6">
+                        <img src="~/PageUI/UserInfoIndex/images/danmgydxm.png" />
+                    </div>
+                </div>
+
+                @*消息*@
+                <!--一条开始-->
+                <div class="public_m1" id="XTXX" hidden>
+                    <div class="public_m2">系统消息</div>
+
+                    <!--充值提现-->
+                    <div class="chongzhi_htxm">
+                        <a href="javascript:0" onclick="SwitchModel('XTXX')">系统消息<font>(0)</font></a>
+                        <a href="javascript:0" onclick=" SwitchModel('SJXX')">商家消息<font>(2)</font></a>
+                    </div>
+                    <!--全选和删除-->
+                    <div class="chice_allm">
+                        <input type="checkbox">
+                        <i>全选</i>
+                        <span>删除</span>
+                    </div>
+                    <!--一个订单信息-->
+                    <div class="public_m5">
+                        <table border="0" cellspacing="0" cellpadding="0">
+                            <tbody>
+                                <tr style=" border-bottom:1px solid #000">
+                                    <th class="olist2">标题</th>
+                                    <th class="olist3">时间</th>
+                                    <th class="olist4">操作</th>
+                                </tr>
+                                <tr>
+                                    <td>吃饭了么...</td>
+                                    <td>2016/06/06 20:30</td>
+                                    <td><a style=" margin-right:6px">查看</a><a>删除</a></td>
+                                </tr>
+                                <tr>
+                                    <td>吃饭了么...</td>
+                                    <td>2016/06/06 20:30</td>
+                                    <td><a style=" margin-right:6px">查看</a><a>删除</a></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <!--当没有东西时的东西-->
+                    <div class="public_m6">
+                        <img src="~/PageUI/UserInfoIndex/images/danmgydxm.png" />
+                    </div>
+                </div>
+                <!--一条开始-->
+                <div class="public_m1" id="SJXX" hidden>
+                    <div class="public_m2">商家消息</div>
+
+                    <!--充值提现-->
+                    <div class="chongzhi_htxm">
+                        <a href="javascript:0" onclick="SwitchModel('XTXX', this)">系统消息<font>(0)</font></a>
+                        <a href="javascript:0" onclick=" SwitchModel('SJXX', this)">商家消息<font>(2)</font></a>
+                    </div>
+                    <!--全选和删除-->
+                    <div class="chice_allm">
+                        <input type="checkbox">
+                        <i>全选</i>
+                        <span>删除</span>
+                    </div>
+                    <!--一个订单信息-->
+                    <div class="public_m5">
+                        <table border="0" cellspacing="0" cellpadding="0">
+                            <tbody>
+                                <tr style=" border-bottom:1px solid #000">
+                                    <th class="olist1">发信人</th>
+                                    <th class="olist2">标题</th>
+                                    <th class="olist3">时间</th>
+                                    <th class="olist4">操作</th>
+                                </tr>
+                                <tr>
+                                    <td><a>木木小店</a></td>
+                                    <td>吃饭了么...</td>
+                                    <td>2016/06/06 20:30</td>
+                                    <td><a style=" margin-right:6px">查看</a><a>删除</a></td>
+                                </tr>
+                                <tr>
+                                    <td><a>木木小店</a></td>
+                                    <td>吃饭了么...</td>
+                                    <td>2016/06/06 20:30</td>
+                                    <td><a style=" margin-right:6px">查看</a><a>删除</a></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <!--当没有东西时的东西-->
+                    <div class="public_m6">
+                        <img src="~/PageUI/UserInfoIndex/images/danmgydxm.png" />
+                    </div>
+                </div>
+                <!--一条开始-->
+                <div class="public_m1" id="WDHY" hidden>
+                    <div class="public_m2">商家消息</div>
+
+                    <!--充值提现-->
+                    <div class="chongzhi_htxm">
+                        <a href="javascript:0" onclick="SwitchModel('XTXX', this)">系统消息<font>(0)</font></a>
+                        <a href="javascript:0" onclick=" SwitchModel('SJXX', this)">商家消息<font>(2)</font></a>
+                    </div>
+                    <!--全选和删除-->
+                    <div class="chice_allm">
+                        <input type="checkbox">
+                        <i>全选</i>
+                        <a>删除</a>
+                        <a>添加好友</a>
+                        <a>好友请求（0）</a>
+                    </div>
+                    <!--一个订单信息-->
+                    <div class="public_m5">
+                        <table border="0" cellspacing="0" cellpadding="0">
+                            <tbody>
+                                <tr style=" border-bottom:1px #000">
+                                    <th class="olist1">好友名称</th>
+                                    <th class="olist2">添加时间</th>
+                                    <th class="olist4">操作</th>
+                                </tr>
+                                <tr>
+                                    <td><a>瓜牛</a></td>
+                                    <td>2016/06/06 20:30</td>
+                                    <td><a style=" margin-right:6px">查看</a><a>删除</a></td>
+                                </tr>
+                                <tr>
+                                    <td><a>瓜牛</a></td>
+                                    <td>2016/06/06 20:30</td>
+                                    <td><a style=" margin-right:6px">查看</a><a>删除</a></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <!--当没有东西时的东西-->
+                    <div class="public_m6">
+                        <img src="~/PageUI/UserInfoIndex/images/danmgydxm.png" />
+                    </div>
+                </div>
+
+                <!--占空隙-->
+                <div class="whatfuck_m"></div>
+            </div>
+        </div>
+    </div>
+    <!--商品添加Model-->
+    <div class="modal fade" id="GoodsAddModel" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        ×
+                    </button>
+                    <h4 class="modal-title">
+                        商品添加
+                    </h4>
+                </div>
+                <div class="modal-body">
+                    <form id="GoodsInfoForm" class="layui-form layui-form-pane" lay-filter="GoodsInfoForm">
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">商品名</label>
+                            <div class="layui-input-inline">
+                                <input type="text" id="GoodsAddModel_GoodsName" lay-verify="required" placeholder="请输入商品名" autocomplete="off" class="layui-input">
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">类别</label>
+                            <div class="layui-input-inline">
+                                <select id="GoodsAddModel_GoodsCategorySel" lay-verify="required" lay-search="">
+                                    @*动态添加类别*@
+                                </select>
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">价格</label>
+                            <div class="layui-input-inline">
+                                <input type="text" id="GoodsAddModel_GoodsPrice" lay-verify="required|number" placeholder="请输入价格" autocomplete="off" class="layui-input">
+                            </div>
+                        </div>
+                        <div class="layui-form-item layui-form-text">
+                            <label class="layui-form-label">商品简介</label>
+                            <div class="layui-input-block">
+                                <textarea id="GoodsAddModel_GoodsIntroduce" placeholder="请输入内容" class="layui-textarea"></textarea>
+                            </div>
+                        </div>
+                        <div class="layui-form-item" style="text-align:center">
+                            <button id="AddGoodsBtn" class="layui-btn layui-btn-normal hide" lay-submit lay-filter="GoodsAddModel_Submit">
+                                添加
+                            </button>
+                            <button id="AddGoodsReset" type="reset" class="layui-btn layui-btn-primary hide">重置</button>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="layui-btn layui-btn-normal" onclick="$('#AddGoodsBtn').click(); $('#GoodsAddModel_Close').click();">
+                        添加
+                    </button>
+                    <button id="GoodsAddModel_Close" type="button" class="layui-btn  layui-btn-primary" data-dismiss="modal">
+                        关闭
+                    </button>
+                    <button type="button" class="layui-btn layui-btn-primary" onclick="$('#AddGoodsReset').click();">
+                        重置
+                    </button>
+
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+    </div>
+    <!--商品编辑Model-->
+    <div class="modal fade" id="GoodsModifyModel" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        ×
+                    </button>
+                    <h4 class="modal-title">
+                        商品编辑
+                    </h4>
+                </div>
+                <div class="modal-body">
+                    <form id="GoodsModifyInfoForm" class="layui-form layui-form-pane" lay-filter="GoodsModifyInfoForm">
+                        <div class="layui-form-item hide">
+                            <label class="layui-form-label">GoodsId</label>
+                            <div class="layui-input-inline">
+                                <input type="text" id="GoodsModifyModel_GoodsId" placeholder="GoodsId" autocomplete="off" class="layui-input">
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">商品名</label>
+                            <div class="layui-input-inline">
+                                <input type="text" id="GoodsModifyModel_GoodsName" lay-verify="required" placeholder="请输入商品名" autocomplete="off" class="layui-input">
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">类别</label>
+                            <div class="layui-input-inline">
+                                <select id="GoodsModifyModel_GoodsCategorySel" lay-verify="required" lay-search="">
+                                    @*动态添加类别*@
+                                </select>
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">价格</label>
+                            <div class="layui-input-inline">
+                                <input type="text" id="GoodsModifyModel_GoodsPrice" lay-verify="required|number" placeholder="请输入价格" autocomplete="off" class="layui-input">
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">封面图</label>
+                            <div class="layui-upload">
+                                <button type="button" class="layui-btn layui-btn-normal" id="GoodsModifyInfoForm_FMImgSeleBtn">封面图上传</button>
+                                <div class="layui-upload-list">
+                                    <blockquote class="layui-elem-quote layui-quote-nm" style="margin-top: 10px;">
+                                        <img id="GoodsModifyInfoForm_FMImg" class="layui-upload-img" style="width:100px;height:100px;" src="/Img/DefaultImg/GoodsFMImg.jpg">
+                                        <p id="demoText"></p>
+                                    </blockquote>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="layui-form-item layui-form-text">
+                            <label class="layui-form-label">商品简介</label>
+                            <div class="layui-input-block">
+                                <textarea id="GoodsModifyModel_GoodsIntroduce" placeholder="请输入内容" class="layui-textarea"></textarea>
+                            </div>
+                        </div>
+                        <div class="layui-form-item" style="text-align:center">
+                            <button id="GoodsModifyModel_Submit" class="layui-btn layui-btn-normal hide" lay-submit lay-filter="GoodsModifyModel_Submit">
+                                修改
+                            </button>
+                            <button id="GoodsModifyInfoForm_reset" type="reset" class="layui-btn layui-btn-primary hide">重置</button>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="layui-btn layui-btn-normal" onclick="$('#GoodsModifyModel_Submit').click(); $('#GoodsModifyModel_Close').click();">
+                        修改
+                    </button>
+                    <button id="GoodsModifyModel_Close" type="button" class="layui-btn  layui-btn-primary" data-dismiss="modal">
+                        关闭
+                    </button>
+                    <button type="button" class="layui-btn layui-btn-primary" onclick="$('#GoodsModifyInfoForm_reset').click();">
+                        重置
+                    </button>
+
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+    </div>
+</body>
+</html>
+<script src="~/PageUI/UserInfoIndex/js/UserInfoIndex.js"></script>
+<script src="~/layui/layui.all.js" charset="utf-8"></script>
+<script src="~/Scripts/bootstrapSwitch.js" charset="utf-8"></script>
+<!--WaterfallDataUi-->
+<script src="~/PageUI/WaterfallDataUi/js/jQeasing.js"></script>
+<script src="~/PageUI/WaterfallDataUi/js/jquery.masonry.min.js"></script>
+<script src="~/PageUI/WaterfallDataUi/js/jQueryColor.js"></script>
+
+<script>
+    //预加载
+    $(function () {
+        //初始化
+        $("[data-toggle='tooltip']").tooltip('hide');
+
+        //获取用户信息
+        GetUserInfo();
+        GetGoodsCategory();
+
+        //配置layui环境
+        layui.use('laydate', function () {
+            var laydate = layui.laydate;
+            //常规用法
+            laydate.render({
+                elem: '#i_birthday'
+            });
+        });
+
+        //我的商店的显示选择
+        $.ajax({
+            url: "/Shop/CheckRegShop",
+            data: { UserName: user.UserName },
+            dataType: "json",
+            type: "post",
+            async: false,
+            success: function (data) {
+                if (data == false) {
+                    $("#MyShopModel").hide();
+                    $("#MyShopModel").next().hide();
+                }
+            }
+        });
+
+        //数据校验
+        layui.use(['form', 'layedit', 'laydate'], function () {
+            var form = layui.form
+            , layer = layui.layer
+            , layedit = layui.layedit
+            , laydate = layui.laydate;
+
+            //时间选择器
+            laydate.render({
+                elem: '#StartTime'
+                , type: 'time'
+
+            });
+            laydate.render({
+                elem: '#EndTime'
+                , type: 'time'
+
+            });
+
+            //创建一个编辑器
+            var editIndex = layedit.build('LAY_demo_editor');
+
+            //自定义验证规则
+            form.verify({
+                ShopName: function (value) {
+                    if (value.length < 1) {
+                        return '商店名至少得1个字符';
+                    }
+                }
+              , pass: [/(.+){6,12}$/, '密码必须6到12位']
+              , content: function (value) {
+                  layedit.sync(editIndex);
+              }
+
+            });
+
+            //监听指定开关
+            //form.on('switch(switchTest)', function (data) {
+            //    layer.msg('开关checked：' + (this.checked ? 'true' : 'false'), {
+            //        offset: '6px'
+            //    });
+            //    layer.tips('温馨提示：请注意开关状态的文字可以随意定义，而不仅仅是ON|OFF', data.othis)
+            //});
+
+            //监听提交
+            form.on('submit(ModifyShopInfo_Submit)', function (data) {
+                //开始修改商家信息
+                ModifyShopInfo();
+                return false;
+            });
+
+            form.on('submit(GoodsAddModel_Submit)', function (data) {
+                AddGoods();
+                return false;
+            });
+
+            form.on('submit(GoodsModifyModel_Submit)', function (data) {
+                ModifyGoodsInfoByUserName();
+                return false;
+            });
+        });
+
+        //文件上传
+        layui.use('upload', function () {
+            var $ = layui.jquery
+            , upload = layui.upload;
+
+            //商店封面图片上传
+            var shopFMupload=upload.render({
+                elem: '#fmImgSeleBtn'
+              , url: "/Shop/UploadShopFMImg?UserName=" + user.UserName
+              , method: 'post'
+              , accept: "images"
+              , before: function (obj) {
+                  //预读本地文件示例，不支持ie8
+                  obj.preview(function (index, file, result) {
+                      $('#demo1').attr('src', result); //图片链接（base64）
+                  });
+              }
+              , done: function (data) {
+                  //上传成功
+                  if (data == true) {
+                      return layer.msg("封面已上传成功！");
+                  } else {
+                      //如果上传失败
+                      return layer.msg('上传失败');
+                  }
+
+              }
+              , error: function () {
+                  //失败状态，并实现重传
+                  var demoText = $('#demoText');
+                  demoText.html('<span style="color: #FF5722;">上传失败</span> <br/><a class="layui-btn layui-btn-mini demo-reload layui-btn-normal">重试</a>');
+                  demoText.find('.demo-reload').on('click', function () {
+                      uploadInst.upload();
+                  });
+              }
+            });
+
+            //商品封面图片上传
+            var goodsFMupload = upload.render({
+                elem: '#GoodsModifyInfoForm_FMImgSeleBtn'
+              , url: "/Shop/UploadGoodsFMImg"
+              , method: 'post'
+              , accept: "images"
+              , before: function (obj) {
+                  //预读本地文件示例，不支持ie8
+                  this.data = { "UserName": user.UserName, "GoodsId": $("#GoodsModifyModel_GoodsId").val() };//额外参数关键代码
+                  obj.preview(function (index, file, result) {
+                      $('#demo1').attr('src', result); //图片链接（base64）
+                  });
+              }
+              , done: function (data) {
+                  //上传成功
+                  if (data == true) {
+                      GetGoodsInfo(updateGoodsId);
+                      return layer.msg("封面已上传成功！");
+                  } else {
+                      //如果上传失败
+                      return layer.msg('上传失败');
+                  }
+              }
+              , error: function () {
+                  //失败状态，并实现重传
+                  var demoText = $('#demoText');
+                  demoText.html('<span style="color: #FF5722;">上传失败</span> <br/><a class="layui-btn layui-btn-mini demo-reload layui-btn-normal">重试</a>');
+                  demoText.find('.demo-reload').on('click', function () {
+                      uploadInst.upload();
+                  });
+              }
+            });
+
+
+            //多文件列表上传
+            var demoListView = $('#demoList')
+            , uploadListIns = upload.render({
+                elem: '#tgImgSelBtn'
+              , url: "/Shop/UploadShopTGImg"
+              , data: { UserName: user.UserName }
+              , accept: 'file'
+              , multiple: true
+              , auto: false
+              , method: 'post'
+              , accept: "images"
+              , bindAction: '#tgImgULBtn'
+              , choose: function (obj) {
+                  var files = this.files = obj.pushFile(); //将每次选择的文件追加到文件队列
+                  //读取本地文件
+                  obj.preview(function (index, file, result) {
+                      var tr = $(['<tr id="upload-' + index + '">'
+                        , '<td>' + file.name + '</td>'
+                        , '<td>' + (file.size / 1014).toFixed(1) + 'kb</td>'
+                        , '<td>等待上传</td>'
+                        , '<td>'
+                          , '<button class="layui-btn layui-btn-mini demo-reload layui-hide">重传</button>'
+                          , '<button class="layui-btn layui-btn-mini layui-btn-danger demo-delete">删除</button>'
+                        , '</td>'
+                      , '</tr>'].join(''));
+
+                      //单个重传
+                      tr.find('.demo-reload').on('click', function () {
+                          obj.upload(index, file);
+                      });
+
+                      //删除
+                      tr.find('.demo-delete').on('click', function () {
+                          delete files[index]; //删除对应的文件
+                          tr.remove();
+                          uploadListIns.config.elem.next()[0].value = ''; //清空 input file 值，以免删除后出现同名文件不可选
+                      });
+
+                      demoListView.append(tr);
+                  });
+              }
+              , done: function (data, index, upload) {
+                  if (data == true) { //上传成功
+                      var tr = demoListView.find('tr#upload-' + index)
+                      , tds = tr.children();
+                      tds.eq(2).html('<span style="color: #5FB878;">上传成功</span>');
+                      tds.eq(3).html(''); //清空操作
+                      return delete this.files[index]; //删除文件队列已经上传成功的文件
+                  }
+                  this.error(index, upload);
+              }
+              , error: function (index, upload) {
+                  var tr = demoListView.find('tr#upload-' + index)
+                  , tds = tr.children();
+                  tds.eq(2).html('<span style="color: #FF5722;">上传失败</span>');
+                  tds.eq(3).find('.demo-reload').removeClass('layui-hide'); //显示重传
+              }
+            });
+
+        });
+
+        $(document).on("click", "a", function () {
+            $.getScript('/Scripts/bootstrapSwitch.js', function () {
+                //再次加載JS文件
+            });
+        });
+    });
+
+</script>

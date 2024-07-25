@@ -1,0 +1,107 @@
+﻿@{
+    ViewBag.Title = "招贤纳士";
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <title>星辰电脑维修-@ViewBag.Title </title>
+    <link rel="stylesheet" type="text/css" href="~/PageUI/MyInfoIndexUi/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="~/layui/css/layui.css" />
+    <link rel="stylesheet" type="text/css" href="~/PageUI/MyInfoIndexUi/css/style.css" />
+</head>
+<body>
+    @*页面标志*@
+    <input type="text" id="YM" value="ZXNS" hidden />
+    <div id="ZXNS">
+
+        <!--招贤纳士-->
+        <div class="recruit wrap">
+            <div class="title">加入我们</div>
+
+            <div class="recruitlist">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+                        <div class="name">
+                            @*<img src="img/yuan.png" />*@
+                            <span class="ccf0f32">电脑维修技术员</span>
+                            <span class="ccf0f32 num">999</span>
+                            <span class="que">职位空缺</span>
+                        </div>
+                        <div class="text">
+                            <span class="yaoqiu">资格要求：</span>
+                            <span>1、热爱电脑，对电脑维修有热情</span>
+                            <span>2、具有严谨的逻辑</span>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+                        <div class="name">
+                            @*<img src="img/gai.png" />*@
+                            <span class="ccf0f32">信息管理员</span>
+                            <span class="ccf0f32 num">132</span>
+                            <span class="que">职位空缺</span>
+                        </div>
+                        <div class="text">
+                            <span class="yaoqiu">资格要求：</span>
+                            <span>1、大专以上学历，信息技术相关专业；</span>
+                            <span>2、1年以上工作经验；</span>
+                            <span>3、态度积极，工作勤奋，善于和策划沟通，具备团队合作精神。</span>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+                        <div class="name">
+                            @*<img src="img/cha.png" />*@
+                            <span class="ccf0f32">宣传师</span>
+                            <span class="ccf0f32 num">66</span>
+                            <span class="que">职位空缺</span>
+                        </div>
+                        <div class="text">
+                            <span class="yaoqiu">资格要求：</span>
+                            <span>1、有较强的责任心和工作耐心，有团队协作意识和创新精神。</span>
+                            <span>2、具备优秀的时尚的审美能力，同时能适应主流商业审美需求。</span>
+                            <span>3、有1年以上游戏行业工作经验（如果作品突出可以破格）</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="tishi">请发【简历+作品（文件命名求职职位+姓名+QQ+电话)】到邮箱 ：123456@qq.com，我们会尽快与您联系！</div>
+        </div>
+
+    </div>
+</body>
+
+</html>
+<script src="~/PageUI/MyInfoIndexUi/js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="~/PageUI/MyInfoIndexUi/js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="~/layui/layui.js" type="text/javascript" charset="utf-8"></script>
+
+<script type="text/javascript">
+    $(".row>div").mouseenter(function () {
+        $(this).find(".bg").show();
+        $(this).find(".title").show();
+    }).mouseleave(function () {
+        $(this).find(".bg").hide();
+        $(this).find(".title").hide();
+    });
+    layui.use(['carousel', 'form'], function () {
+        var carousel = layui.carousel
+        , form = layui.form;
+
+        //常规轮播
+        carousel.render({
+            elem: '#test1'
+          , arrow: 'always'
+        });
+    });
+</script>
+
+
+
+
+
+
+
+
+

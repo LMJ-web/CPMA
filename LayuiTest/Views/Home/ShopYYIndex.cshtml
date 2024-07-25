@@ -1,0 +1,397 @@
+﻿@{
+    ViewBag.Title = "商店界面";
+}
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+<title>星辰电脑维修-@ViewBag.Title </title>
+<link rel="stylesheet" type="text/css" href="~/PageUI/MyInfoIndexUi/css/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" href="~/PageUI/MyInfoIndexUi/css/style.css" />
+<link rel="stylesheet" type="text/css" href="~/PageUI/MyInfoIndexUi/css/animate.min.css">
+<link rel="stylesheet" type="text/css" href="~/layui/css/layui.css">
+
+@*幻灯片*@
+<!-- CSS STYLE -->
+<link rel="stylesheet" type="text/css" href="~/PageUI/ShopYYIndex/css/style.css" media="screen" />
+<link rel="stylesheet" type="text/css" href="~/PageUI/ShopYYIndex/css/settings.css" media="screen" />
+
+<!-- FONT IMPORT -->
+<link href='~/PageUI/ShopYYIndex/css/css.css' rel='stylesheet' type='text/css'>
+
+<!--3D飘雪花特效 整理by yaxi.net-->
+<script type="text/javascript" src="http://apps.bdimg.com/libs/jquery/1.7.2/jquery.min.js"></script>
+<script type="text/javascript" src="/Scripts/snow.js"></script>
+
+<!--评论区-->
+<link rel="stylesheet" type="text/css" href="~/PageUI/CommentUI/css/Comment.css" media="screen" />
+<script type="text/javascript" src="~/PageUI/CommentUI/js/demo.js"></script>
+<style type="text/css">
+    .snow-container {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        z-index: 100001;
+    }
+</style>
+<style>
+    .nav li a {
+        /*设置导航字体大小*/
+        font-size: 18px;
+    }
+
+    .center {
+        margin: 0 auto;
+    }
+</style>
+
+<div class="in " aria-labelledby="myModalLabel" aria-hidden="true" style="width: auto; display: block;">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2 class="modal-title" id="myModalLabel" style="text-align:center">
+                商家信息
+            </h2>
+        </div>
+        <div class="modal-body" style="margin-top:10px;">
+            <!--信息展示表-->
+            <form class="layui-form layui-form-pane center" style="padding-left:1px;width:380px;">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">商店名</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="ShopName" id="ShopName" placeholder="请输入商店名" autocomplete="off" class="layui-input" value='@ViewBag.Shop.ShopName' disabled>
+                    </div>
+                </div>
+
+                <div class="layui-form-item">
+                    <label class="layui-form-label">联系人</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="ShopContact" id="ShopContact" placeholder="请输入联系人" autocomplete="off" class="layui-input" value='@ViewBag.Shop.ShopContact' disabled>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">手机号码</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="ShopPhone" id="ShopPhone" placeholder="请输入手机号码" autocomplete="off" class="layui-input" value=@ViewBag.Shop.ShopPhone disabled>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <div class="layui-inline">
+                        <label class="layui-form-label">营业时间</label>
+                        <div class="layui-input-inline" style="width: 100px;">
+                            <input type="text" name="StartTime" id="StartTime" autocomplete="off" class="layui-input" value=@ViewBag.Shop.StartTime disabled>
+                        </div>
+                        <div class="layui-form-mid">-</div>
+                        <div class="layui-input-inline" style="width: 100px;">
+                            <input type="text" name="EndTime" id="EndTime" autocomplete="off" class="layui-input" value=@ViewBag.Shop.EndTime disabled>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <div class="layui-inline">
+                        <label class="layui-form-label">价格</label>
+                        <div class="layui-input-inline" style="width: 100px;">
+                            <input type="text" name="MinPrice" id="MinPrice" placeholder="￥" autocomplete="off" class="layui-input" value=@ViewBag.Shop.MaxPrice disabled>
+                        </div>
+                        @*<div class="layui-form-mid">-</div>
+                        <div class="layui-input-inline" style="width: 100px;">
+                            <input type="text" name="MaxPrice" id="MaxPrice" placeholder="￥" autocomplete="off" class="layui-input" value=@ViewBag.Shop.MinPrice disabled>
+                        </div>*@
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">商店地址</label>
+                    <!--插入插件-->
+                    <div class="layui-input-block">
+                        <input type="text" id="ShopAddress" name="ShopAddress" value='@ViewBag.Shop.ShopAddress' autocomplete="off" class="layui-input" disabled />
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">详细地址</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="ShopDAddress" id="ShopDAddress" autocomplete="off" placeholder="请输入商店地址" class="layui-input" value='@ViewBag.Shop.ShopDAddress' disabled>
+                    </div>
+                </div>
+
+                <div class="layui-form-item layui-form-text">
+                    <label class="layui-form-label">商店介绍</label>
+                    <div class="layui-input-block">
+                        <textarea placeholder='@ViewBag.Shop.ShopIntroduce' class="layui-textarea" id="ShopIntroduce" disabled></textarea>
+                    </div>
+                </div>
+            </form>
+
+            <input id="ShopTGImgPath" type="text" value="@ViewBag.Shop.ShopTGImgPath" hidden />
+
+            <!--图片展示区-->
+            <div id="ShopTGImg_Div" class="light" style="margin-top:10px;">
+                <ul>
+                    <!-- THE 1. SLIDE -->
+                    <li data-transition="fade">
+                        <img src="/PageUI/ShopYYIndex/images/slide1.jpg" data-thumb="/PageUI/ShopYYIndex/images/thumb1.jpg" data-thumb_bw="/PageUI/ShopYYIndex/images/thumb1_bw.jpg" alt="" style="width:100%;height:auto;"/>
+                        <div class="creative_layer">
+                            <div class="caption_blue fadeup" style="top:170px;left:50px;">Welcome to PARADIGM</div>
+                            <div class="caption_black smallcap faderight" style="top:213px;left:90px">The highly customizable slider solution</div>
+                        </div>
+                    </li>
+
+                    <!-- THE 2. SLIDE -->
+                    <li data-transition="slide">
+                        <img src="/PageUI/ShopYYIndex/images/vimeo.jpg" data-thumb="/PageUI/ShopYYIndex/images/thumb_vimeo.jpg" data-thumb_bw="/PageUI/ShopYYIndex/images/thumb_vimeo_bw.jpg" alt="" style="width:100%;height:auto;" />
+                        <div class="video_pradigm">
+                            <div class="video_paradigm_wrap">
+                                <iframe class="video_clip" src="http://player.vimeo.com/video/24456787?title=0&amp;byline=0&amp;portrait=0" width="534" height="300" frameborder="0" webkitallowfullscreen allowfullscreen></iframe>
+                                <h2>Vimeo Video Support</h2>
+                                <p> Themepunch creates beautiful and elegant termplates, themes and components that suit your clients needs. </p>
+                                <p> <strong>Lorem ipsum</strong> dolor sit amet, consetetur sadipscing elitr, sed diam nonumy <strong>eirmod tempor</strong>. </p>
+                                <a class="buttonlight" href="#">Visit Website</a>
+                                <div id="close"></div>
+                            </div>
+                        </div>
+                        <div class="creative_layer">
+                            <div class="caption_blue fadeleft" style="top:120px;left:590px;">Vimeo Video</div>
+                            <div class="caption_white faderight" style="top:120px;left:722px;">Support</div>
+                            <div class="caption_black smallcap fadeup" style="top:163px;left:590px;">Click the play button</div>
+                        </div>
+                    </li>
+
+                    <!-- THE 3. SLIDE -->
+                    <li data-transition="slide">
+                        <img src="/PageUI/ShopYYIndex/images/slide2.jpg" data-thumb="/PageUI/ShopYYIndex/images/thumb2.jpg" data-thumb_bw="/PageUI/ShopYYIndex/images/thumb2_bw.jpg" alt="" style="width:100%;height:auto;" />
+                        <div class="creative_layer">
+                            <div class="caption_green fadedown" style="top:80px;left:550px;">Some of Paradigm's Options:</div>
+                            <div class="caption_black smallcap fadeleft" style="top:123px;left:550px">Image and thumbs fully resizable</div>
+                            <div class="caption_black smallcap fadeleft" style="top:157px;left:550px">Optional parallax effect</div>
+                            <div class="caption_black smallcap fadeleft" style="top:191px;left:550px">iPhone & Android touch enabled</div>
+                        </div>
+                    </li>
+                    <!-- THE 4. SLIDE -->
+                    <li data-transition="fade">
+                        <img src="/PageUI/ShopYYIndex/images/slide3.jpg" data-thumb="/PageUI/ShopYYIndex/images/thumb3.jpg" data-thumb_bw="/PageUI/ShopYYIndex/images/thumb3_bw.jpg" alt="" style="width:100%;height:auto;" />
+                        <div class="creative_layer">
+                            <div class="caption_orange fadeup" style="top:210px;left:200px;">Captions can be positioned freely</div>
+                            <div class="caption_white fadedown" style="top:210px;left:513px;"><a href="#">Example URL-link</a></div>
+                        </div>
+                    </li>
+
+                    <!-- THE 5. SLIDE -->
+                    <li data-transition="fade">
+                        <img src="/PageUI/ShopYYIndex/images/youtube.jpg" data-thumb="/PageUI/ShopYYIndex/images/thumb_youtube.jpg" data-thumb_bw="/PageUI/ShopYYIndex/images/thumb_youtube_bw.jpg" alt="" style="width:100%;height:auto;" />
+                        <div class="video_pradigm">
+                            <div class="video_paradigm_wrap">
+                                <iframe class="video_clip" src="http://www.youtube.com/embed/kjX-8kQmakk?hd=1&amp;wmode=opaque&amp;autohide=1&amp;showinfo=0" height="300" width="534" frameborder="0" webkitallowfullscreen allowfullscreen></iframe>
+                                <h2>Youtube Video Support</h2>
+                                <p> Themepunch creates beautiful and elegant termplates, themes and components that suit your clients needs. </p>
+                                <p> <strong>Lorem ipsum</strong> dolor sit amet, consetetur sadipscing elitr, sed diam nonumy <strong>eirmod tempor</strong>. </p>
+                                <a class="buttonlight" href="#">More Info</a>
+                                <div id="close"></div>
+                            </div>
+                        </div>
+                        <div class="creative_layer">
+                            <div class="caption_red fadeleft" style="top:120px;left:580px;"><a href="#">Youtube Video</a></div>
+                            <div class="caption_white faderight" style="top:120px;left:728px;">Support</div>
+                        </div>
+                    </li>
+
+                    <!-- THE 6. SLIDE -->
+                    <li data-transition="slide">
+                        <img src="/PageUI/ShopYYIndex/images/slide4.jpg" data-thumb="/PageUI/ShopYYIndex/images/thumb4.jpg" data-thumb_bw="/PageUI/ShopYYIndex/images/thumb4_bw.jpg" alt="" style="width:100%;height:auto;" />
+                        <div class="creative_layer">
+                            <div class="caption_black nobg largecap fadeleft" style="top:60px;left:530px;">Text with no background</div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <input id="shopId" type="text" value="@ViewBag.Shop.ShopId" hidden />
+            <div class="layui-form-item" style="text-align:center;margin-top:30px">
+                <button class="layui-btn layui-btn-normal" id="ReservationsBtn" onclick="SureReservation(@ViewBag.Shop.ShopId)">预约</button>
+            </div>
+            <div style="height:10px;width:auto;background:#1E9FFF;"></div>
+            <!--评论显示区-->
+            <div>
+                <div id="commentList">
+                    @*动态添加数据*@
+                </div>
+            </div>
+        </div>
+    </div>
+</div><!-- /.modal-dialog -->
+<div class="snow-container"></div>
+<!-- get jQuery from the google apis -->
+<script type="text/javascript" src="~/PageUI/ShopYYIndex/js/jquery.js"></script>
+
+@*<script src="~/PageUI/MyInfoIndexUi/js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>*@
+<script src="~/Scripts/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="~/layui/layui.all.js" type="text/javascript" charset="utf-8"></script>
+
+@*幻灯片*@
+<!-- jQuery Paradigm Slider  -->
+<script type="text/javascript" src="~/PageUI/ShopYYIndex/js/jquery.easing.1.3.js"></script>
+<script type="text/javascript" src="~/PageUI/ShopYYIndex/js/jquery.cssAnimate.mini.js"></script>
+<script type="text/javascript" src="~/PageUI/ShopYYIndex/js/jquery.waitforimages.js"></script>
+<script type="text/javascript" src="~/PageUI/ShopYYIndex/js/jquery.touchwipe.min.js"></script>
+<script type="text/javascript" src="~/PageUI/ShopYYIndex/js/jquery.themepunch.paradigm.js"></script>
+<!-----------------操作----------------->
+<script>
+    if (sessionStorage.user != "" && sessionStorage.user != null) {
+        var user = JSON.parse(sessionStorage.getItem("user"));
+    }
+    $(function () {
+        $('#ShopTGImg_Div').paradigm(
+           {
+               width: 900,
+               height: 300,
+
+               thumbWidth: 90,
+               thumbHeight: 50,
+               thumbAmount: 6,
+               thumbSpaces: 4,
+               thumbPadding: 4,
+               thumbStyle: "thumb",
+               thumbVideoIcon: "on",
+               bulletXOffset: 0,
+               bulletYOffset: 0,
+
+               shadow: 'true',
+
+               parallaxX: 500,
+               parallaxY: 10,
+               captionParallaxX: -40,
+               captionParallaxY: 2,
+
+               touchenabled: 'on',
+
+               timer: 5
+           });
+        SetShopTGImg();
+        GetShopCommentById($("#shopId").val());
+    })
+
+    //预约商店
+    function SureReservation(shopId) {
+        if (user != null && user != ""){
+            //示范一个公告层
+            layer.open({
+                type: 1
+              ,title: false //不显示标题栏
+              ,closeBtn: false
+              ,area: '300px;'
+              ,shade: 0.8
+              ,id: 'LAY_layuipro' //设定一个id，防止重复弹出
+              ,btn: ['确定', '取消']
+              ,btnAlign: 'c'
+              ,moveType: 1 //拖拽模式，0或者1
+              ,content: '<div style="padding: 50px; line-height: 22px; font-weight: 300;">请选择需要预约的时间段：<div class="layui-inline"><div class="layui-input-inline"><input type="text" class="layui-input" id="YYTime" placeholder="yyyy-MM-dd HH:mm:ss"></div></div></div>'
+              ,success: function(layero){
+                  var btn = layero.find('.layui-layer-btn');
+                  $(".layui-layer-btn0").click(function(){
+                      var JTTime=$("#YYTime").val().toString().substring($("#YYTime").val().length-8);
+                      if($("#StartTime").val()<=JTTime && $("#EndTime").val()>JTTime){
+                          //开始预约
+                          $.ajax({
+                              url: "/Shop/ShopReservation",
+                              data: {UserName:user.UserName,ShopId:shopId,YYTime:$("#YYTime").val()},
+                              dataType: "json",
+                              async: false,
+                              success: function (data) {
+                                  if(data==false){
+                                      msg("预约失败！");
+                                  }else{
+                                      msg("预约成功！");
+
+                                  }
+                              }
+                          });
+                      }else{
+                          msg("选择的时间段不在开店时间，请重新选择！");
+                      }
+
+                  });
+              }
+            });
+
+        } else {
+            msg("请先登录！");
+        }
+        layui.use('laydate', function(){
+            var laydate = layui.laydate;
+            //日期时间选择器
+            laydate.render({
+                elem: '#YYTime'
+              ,type: 'datetime'
+            });
+        });
+    }
+
+    //配置一个透明的询问框
+    function msg(content) {
+        layer.msg(content, {
+            time:1500, //20s后自动关闭
+            btn: ['确认']
+        });
+    }
+
+    //设置商家推广图
+    function SetShopTGImg() {
+        var TGImg = $("#ShopTGImgPath").val().split(',');
+        var TGDiv_ul = $("#ShopTGImg_Div").children().eq(0).children();
+            
+        var length = TGImg.length-1;
+        for (var i = 0; i < length; i++) {
+            TGDiv_ul.children().children().children().children().children().eq(i*2).attr("src", TGImg[i+1]);
+            $("#thumb0").css("background",'rgba(0, 0, 0, 0) url("http://localhost:6983/PageUI/ShopYYIndex/images/thumb1_bw.jpg") repeat scroll 0% 0% / auto padding-box border-box');
+        }
+    }
+
+    //通过商店的Id获取该商店评价信息
+    function GetShopCommentById(shopId){
+        $.ajax({
+            url:"/Shop/GetShopCommentById",
+            data:{ShopId:shopId},
+            type:"post",
+            async:true,
+            success:function(data){
+                var html="";
+                var dataLength=data.length;
+                for(var i=0;i<dataLength;i++){
+                    html+='<div class="box clearfix">';
+                    html+=' <a class="close" href="javascript:;">×</a>';
+                    html+='<img class="head" src="'+data[i].UserHeadImgPath+'" alt="" />';
+                    html+=' <div class="content">';
+                    html+=' <div class="main">';
+                    html+='  <p class="txt">';
+                    html+='  <span class="user">'+data[i].UserNickName+'：</span>'+data[i].EvaluateContent+'';
+                    html+='  </p>';
+                    html+=' </div>';
+                    html+=' <div class="info clearfix">';
+                    html+='  <span class="time">'+data[i].EvaluateDate+'</span>';
+                    html+=' <a class="praise" href="javascript:;">赞</a>';
+                    html+='</div>';
+                    html+='<div class="praises-total" total="4" style="display: block;">4个人觉得很赞</div>';
+                    html+=' <div class="comment-list">';
+                    html+=' <div class="comment-box clearfix" user="self">';
+                    html+=' <img class="myhead" src="~/PageUI/CommentUI/images/my.jpg" alt="" />';
+                    html+=' <div class="comment-content">';
+                    html+=' <p class="comment-text"><span class="user">我：</span>不错不错！五星好评！</p>';
+                    html+=' <p class="comment-time">';
+                    html+=' 2018-11-09 14:36';
+                    html+=' <a href="javascript:;" class="comment-praise" total="1" my="0" style="display: inline-block">1 赞</a>';
+                    html+=' <a href="javascript:;" class="comment-operate">删除</a>';
+                    html+=' </p>';
+                    html+='</div>';
+                    html+='</div>';
+                    html+='</div>';
+                    html+=' <div class="text-box">';
+                    html+=' <textarea class="comment" autocomplete="off">评论…</textarea>';
+                    html+=' <button class="btn ">回 复</button>';
+                    html+=' <span class="word"><span class="length">0</span>/140</span>';
+                    html+='</div>';
+                    html+=' </div>';
+                    html+=' </div>';
+                }
+                $("#commentList").html(html);
+            }
+        });
+    }
+</script>

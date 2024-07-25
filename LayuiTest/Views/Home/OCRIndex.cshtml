@@ -1,0 +1,56 @@
+﻿@{
+    Layout = null;
+}
+<html>
+<head>
+    <title>百度云OCR技术</title>
+</head>
+<body>
+    <h1>百度云OCR技术</h1>
+    <h2>提取图片中的 文字|数字|.|-</h2>
+    <div id="main" style="height:500px;width:500px;">
+        <form id="ocr_form" action="#" method="post" enctype="multipart/form-data">
+            <input type="file" id="ocr_form_imgSelBtn" />
+            <button type="submit" id="ocr_form_submit" hidden >提交</button>
+        </form>
+    </div>
+</body>
+</html>
+<script src="~/PageUI/MyInfoIndexUi/js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="~/layui/layui.js" type="text/javascript" charset="utf-8"></script>
+<script>
+    $(function () {
+        layui.use('upload', function () {
+            var $ = layui.jquery
+            , upload = layui.upload;
+            var ocr = upload.render({
+                elem: '#ocr_form_imgSelBtn'
+              , url: "/Home/GetImgText"
+              , method: 'post'
+              , accept: "images"
+              , before: function (obj) {
+                  this.data = { "UserName": "test"};//额外参数关键代码
+              }
+              , done: function (data) {
+                  var regx = /^[\u4e00-\u9fa5 -.a-zA-Z0-9]+$/;
+                  var jsons = "";
+                  for (var i = 0; i < data.words_result_num; i++) {
+                      if (regx.test(data.words_result[i].words)) {
+                          jsons += data.words_result[i].words + "<br\>";
+                      }
+                  }
+                  layer.alert(jsons);
+              }
+              , error: function () {
+                  //失败状态，并实现重传
+                  var demoText = $('#demoText');
+                  demoText.html('<span style="color: #FF5722;">上传失败</span> <br/><a class="layui-btn layui-btn-mini demo-reload layui-btn-normal">重试</a>');
+                  demoText.find('.demo-reload').on('click', function () {
+                      uploadInst.upload();
+                  });
+              }
+            });
+
+        });
+    });
+</script>

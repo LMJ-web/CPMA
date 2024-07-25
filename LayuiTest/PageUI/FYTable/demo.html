@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>BC Gird</title>
+    <link rel="stylesheet" type="text/css" href="http://cdn.bootcss.com/font-awesome/4.6.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="dist/css/bc.grid-1.0.0.min.css"/>
+	
+    <script src="js/jquery.min.js"></script>
+    <script src="dist/bc.grid-1.0.0.min.js"></script>
+	
+</head>
+<body>
+<div>
+    <div id="table"></div>
+</div>
+<script>
+    var data = [{"id":1,"pid":0,"name":"Li","age":1,"gender":1,"email":"bigq517@qq.com","mobile":"139****9517","sign":"Youth is just a section of unoptimized code!Youth is just a section of unoptimized code!Youth is just a section of unoptimized code!"},
+        {"id":2,"pid":0,"name":"Han","age":2,"gender":2,"email":"bigq517@qq.com","mobile":"139****9517","sign":"Youth is just a section of unoptimized code!Youth is just a section of unoptimized code!Youth is just a section of unoptimized code!"},
+        {"id":3,"pid":-1,"name":"Wang","age":4,"gender":1,"email":"bigq517@qq.com","mobile":"139****9517","sign":"Youth is just a section of unoptimized code!Youth is just a section of unoptimized code!Youth is just a section of unoptimized code!"},
+        {"id":4,"pid":1,"name":"Zhang","age":3,"gender":2,"email":"bigq517@qq.com","mobile":"139****9517","sign":"Youth is just a section of unoptimized code!Youth is just a section of unoptimized code!Youth is just a section of unoptimized code!"},
+        {"id":5,"pid":2,"name":"Zhao","age":5,"gender":1,"email":"bigq517@qq.com","mobile":"139****9517","sign":"Youth is just a section of unoptimized code!Youth is just a section of unoptimized code!Youth is just a section of unoptimized code!"},
+        {"id":6,"pid":4,"name":"Meng","age":9,"gender":1,"email":"bigq517@qq.com","mobile":"139****9517","sign":"Youth is just a section of unoptimized code!Youth is just a section of unoptimized code!Youth is just a section of unoptimized code!"},
+		{"id":7,"pid":4,"name":"Meng","age":8,"gender":1,"email":"bigq517@qq.com","mobile":"139****9517","sign":"Youth is just a section of unoptimized code!Youth is just a section of unoptimized code!Youth is just a section of unoptimized code!"},
+		{"id":8,"pid":4,"name":"Meng","age":2,"gender":1,"email":"bigq517@qq.com","mobile":"139****9517","sign":"Youth is just a section of unoptimized code!Youth is just a section of unoptimized code!Youth is just a section of unoptimized code!"},
+		{"id":9,"pid":4,"name":"Meng","age":5,"gender":1,"email":"bigq517@qq.com","mobile":"139****9517","sign":"Youth is just a section of unoptimized code!Youth is just a section of unoptimized code!Youth is just a section of unoptimized code!"},
+		{"id":10,"pid":4,"name":"Meng","age":12,"gender":1,"email":"bigq517@qq.com","mobile":"139****9517","sign":"Youth is just a section of unoptimized code!Youth is just a section of unoptimized code!Youth is just a section of unoptimized code!"},
+		{"id":11,"pid":4,"name":"Meng","age":31,"gender":1,"email":"bigq517@qq.com","mobile":"139****9517","sign":"Youth is just a section of unoptimized code!Youth is just a section of unoptimized code!Youth is just a section of unoptimized code!"},
+		{"id":12,"pid":4,"name":"Meng","age":34,"gender":1,"email":"bigq517@qq.com","mobile":"139****9517","sign":"Youth is just a section of unoptimized code!Youth is just a section of unoptimized code!Youth is just a section of unoptimized code!"},
+		{"id":13,"pid":4,"name":"Meng","age":31,"gender":1,"email":"bigq517@qq.com","mobile":"139****9517","sign":"Youth is just a section of unoptimized code!Youth is just a section of unoptimized code!Youth is just a section of unoptimized code!"},
+		{"id":14,"pid":4,"name":"Meng","age":41,"gender":1,"email":"bigq517@qq.com","mobile":"139****9517","sign":"Youth is just a section of unoptimized code!Youth is just a section of unoptimized code!Youth is just a section of unoptimized code!"},
+		{"id":15,"pid":4,"name":"Meng","age":42,"gender":1,"email":"bigq517@qq.com","mobile":"139****9517","sign":"Youth is just a section of unoptimized code!Youth is just a section of unoptimized code!Youth is just a section of unoptimized code!"},
+		{"id":16,"pid":4,"name":"Meng","age":90,"gender":1,"email":"bigq517@qq.com","mobile":"139****9517","sign":"Youth is just a section of unoptimized code!Youth is just a section of unoptimized code!Youth is just a section of unoptimized code!"},
+		{"id":17,"pid":4,"name":"Meng","age":11,"gender":1,"email":"bigq517@qq.com","mobile":"139****9517","sign":"Youth is just a section of unoptimized code!Youth is just a section of unoptimized code!Youth is just a section of unoptimized code!"},
+		{"id":18,"pid":4,"name":"Meng","age":12,"gender":1,"email":"bigq517@qq.com","mobile":"139****9517","sign":"Youth is just a section of unoptimized code!Youth is just a section of unoptimized code!Youth is just a section of unoptimized code!"},
+        {"id":19,"pid":6,"name":"Meng111","age":20,"gender":1,"email":"bigq517@qq.com","mobile":"139****9517","sign":"Youth is just a section of unoptimized code!Youth is just a section of unoptimized code!Youth is just a section of unoptimized code!"}];
+    $(function () {
+        var grid=BCGrid.create("#table",{
+            columns: [
+                {id: 'id', name: 'id', display: 'ID', align: 'center', hide: true},
+                {
+                    id: 'name', name: 'name', display: 'Name'
+                },
+                {
+                    name: 'gender', display: 'Gender', render: function (item, index) {
+                    if (item.gender == 1) {
+                        return "Boy";
+                    }
+                    if (item.gender == 2) {
+                        return "Girl";
+                    }
+                }
+                },
+                {name: 'age', display: 'Age', format: '{value}Years', enableSort: true},
+                {name: 'email', display: 'Email', enableSort: true},
+                {name: 'mobile', display: 'Mobile'}
+
+            ],
+            dataSource:'local',
+            localData:data
+        });
+
+
+
+    });
+</script>
+</body>
+</html>

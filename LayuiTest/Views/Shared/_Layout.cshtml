@@ -1,0 +1,294 @@
+﻿<!DOCTYPE html>
+<html xmlns:wb="http://open.weibo.com/wb">
+<head>
+
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <link rel="stylesheet" type="text/css" href="~/PageUI/MyInfoIndexUi/css/xuanfu.css" />
+    <link rel="stylesheet" type="text/css" href="~/layui/css/layui.css" media="all" />
+    <title>星辰电脑维修-@ViewBag.Title</title>
+
+    <style>
+        .top {
+            width: 100%;
+            background: #0082df;
+            height: 10px;
+            margin-top: 80px;
+        }
+
+        .hide {
+            display: none;
+        }
+
+        .boxShadow {
+            -webkit-box-shadow: #999 0px 0px 8px;
+            -moz-box-shadow: #999 0px 0px 8px;
+            box-shadow: #999 0px 0px 8px;
+        }
+    </style>
+
+</head>
+<body>
+    @*<input type="text" id="UserName" value="" />*@
+    <!--顶部-->
+    <div id="Header" class="boxShadow">
+        @*<nav class="navbar navbar-default navbar-fixed-top" style="background-color:gray;opacity:0.3;z-index:-100"></nav>*@
+        <nav class="navbar navbar-default navbar-fixed-top">
+            <div class="container-fluid wrap">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <!--logo-->
+                    <a class="navbar-brands layui-anim layui-anim-scaleSpring" href="#">
+                        <img src="~/PageUI/MyInfoIndexUi/img/CPMA_Logo.png" class="LogoImg" />
+                    </a>
+                </div>
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse layui-anim layui-anim-scaleSpring" id="bs-example-navbar-collapse-1" style="width:1350px">
+                    <ul class="nav navbar-nav main-nav">
+                        <li id="li_SY"><a href="/Home/Index">首页</a></li>
+                        <li id="li_SJRZ"><a href="#" onclick="GotoSJRZ()">商家入驻</a></li>
+                        <li id="li_ZXNS"><a href="/Home/ZXNS">招贤纳士</a></li>
+                        <li id="li_LXWM"><a href="/Home/LXWM">联系我们</a></li>
+                        <li style="width:60px;height:100px" class="layui-anim layui-anim-scaleSpring">
+                            <a id="HeadImgSource_H" href="javaScript:(0)" class="hide">
+                                <img class="swiper-slide" style="width: 60px; height: 60px; border-radius:100%;" onclick="GotoUserInfo()" src="" />
+                            </a>
+                        </li>
+                        <li id="sx" class="hide">&#12288;&#12288;|</li>
+                        <li id="li_quit" onclick="Quit()" class="hide"><a href="/Home/Index">安全退出</a></li>
+                        <li id="li_null" class="hide">&#12288;&#12288;&#12288;&#12288;&#12288;&#12288;&#12288;&#12288;&#12288;&#12288;&#12288;&#12288;&#12288;&#12288;&#12288;&#12288;&#12288;&#12288;&#12288;&#12288;&#12288;&#12288;&#12288;&#12288;&#12288;&#12288;&#12288;&#12288;</li>
+                        <li id="li_login" class="layui-anim layui-anim-scaleSpring hide"><button onclick="window.location.href = '/Home/LoginIndex?Status=0';" class="layui-btn layui-btn-normal layui-btn-radius">登录</button></li>
+                        <li>&#12288;</li>
+                        <li id="li_registe" class="layui-anim layui-anim-scaleSpring hide">
+                            <button onclick='window.location.href = "/Home/LoginIndex?Status=0&RegState=1";' class="layui-btn layui-btn-danger layui-btn-radius">注册</button>
+                        </li>
+                    </ul>
+                </div><!-- /.navbar-collapse -->
+            </div><!-- /.container-fluid -->
+        </nav>
+    </div>
+    <!--中间部分-->
+    <div class="boxShadow">
+        <div class="top boxShadow"></div>
+        @RenderBody()
+    </div>
+
+    <div id="wbDiv" style="width:auto;text-align:center;">
+        @*微博分享按钮*@
+        @*<wb:share-button appkey="2955507281" addition="full" type="button" url="" title="【星辰电脑维修-分享】" searchpic="true"></wb:share-button>*@
+    </div>
+
+    <!--右侧悬浮-->
+    <div class="cndns-right layui-anim layui-anim-fadein" id="xuanfu">
+        <div class="cndns-right-meau meau-car" id="Cart_GoodsList_div" onclick="ShowMyGoodsCart()">
+            <a href="javascript:0" class="cndns-right-btn">
+                <img src="/PageUI/MyInfoIndexUi/img/gwc.jpg" style="width:100%;height:100%;" />
+                <sup id="xuanfu_cart_num" class="layui-anim layui-anim-upbit">0</sup>
+            </a>
+        </div>
+        <div class="cndns-right-meau meau-sev">
+            <a href="javascript:0" class="cndns-right-btn">
+                <img src="/PageUI/MyInfoIndexUi/img/kf.jpg" style="width:100%;height:100%;" />
+                <p>
+                    在线<br />
+                    客服
+                </p>
+            </a>
+            <div class="cndns-right-box">
+                <div class="box-border">
+                    <div class="sev-t">
+                        <p>在线客服<i>服务时间：9:00-24:00</i></p>
+                        <div class="clear"></div>
+                    </div>
+                    <div class="sev-b">
+                        <h4>选择下列产品马上在线沟通：</h4>
+                        <ul id="zixunUl">
+                            <li><a href="javascript:void(0);">网站Bug</a></li>
+                            <li><a href="javascript:void(0);">意见</a></li>
+                            <div class="clear"></div>
+                        </ul>
+                    </div>
+                    <span class="arrow-right"></span>
+                </div>
+            </div>
+        </div>
+        <div class="cndns-right-meau meau-contact">
+            <a href="javascript:0" class="cndns-right-btn">
+                <img src="/PageUI/MyInfoIndexUi/img/dh.jpg" />
+                <p>
+                    客服<br />
+                    热线
+                </p>
+            </a>
+            <div class="cndns-right-box">
+                <div class="box-border">
+                    <div class="sev-t">
+                        <img src="/PageUI/MyInfoIndexUi/img/dh.jpg" />
+                        <p>800-800-1800<br /><i>7*24小时客服服务热线</i></p>
+                        <div class="clear"></div>
+                    </div>
+                    <span class="arrow-right"></span>
+                </div>
+            </div>
+        </div>
+        <div class="cndns-right-meau meau-code">
+            <a href="javascript:0" class="cndns-right-btn">
+                <img src="/PageUI/MyInfoIndexUi/img/sm.jpg" />
+                <p>
+                    关注<br />
+                    微信
+                </p>
+            </a>
+            <div class="cndns-right-box">
+                <div class="box-border">
+                    <div class="sev-t">
+                        @*<img src="/PageUI/MyInfoIndexUi/img/lzxwx.jpg" />*@
+                        <i>关注开发者微信</i>
+                    </div>
+                    <span class="arrow-right"></span>
+                </div>
+            </div>
+        </div>
+        <div class="cndns-right-meau meau-top" id="top-back">
+            <a href="javascript:" class="cndns-right-btn" onclick="topBack()">
+                <img src="/PageUI/MyInfoIndexUi/img/up_arrow.jpg" style="width:100%;height:100%;" />
+                <i>顶部</i>
+            </a>
+        </div>
+
+    </div>
+    <!--footer-->
+    <div class="footer boxShadow">
+        <img src="~/PageUI/MyInfoIndexUi/img/foot_logo.png" />
+        <div class="ye_foot_in">
+            <span>
+                <h3>新手上路</h3>
+                <a href="#">用户注册</a>
+                <a href="#">帮助中心</a>
+            </span>
+            <span>
+                <h3>订单中心</h3>
+                <a href="#">我的订单</a>
+                <a href="#">查看订单</a>
+            </span>
+            <span>
+                <h3>会员中心</h3>
+                <a href="#">我的收藏</a>
+                <a href="#">我的点评</a>
+                <a href="#">我的积分</a>
+            </span>
+            <span>
+                <h3>关于我们</h3>
+                <a href="#">公司简介</a>
+                <a href="#">办公环境</a>
+                <a href="#">招贤纳士</a>
+            </span>
+            <span>
+                <h3>帮助中心</h3>
+                <a href="#">账户管理</a>
+                <a href="#">我是商家</a>
+                <a href="#">我是客户</a>
+            </span>
+        </div>
+        CopyRight 
+        星辰电脑维修 <a href="http://www.miitbeian.gov.cn/" style="color:white">粤ICP备MJ-lin</a>
+    </div>
+
+</body>
+</html>
+<!--页面公用方法 js-->
+<script src="~/Scripts/page-public-method.js" type="text/javascript"></script>
+<script>
+    //预加载,每次页面跳转后进来都会执行一次
+    $(function () {
+        //初始化登录信息
+        if (sessionStorage.user != null && sessionStorage.user != "") {
+            var user = JSON.parse(sessionStorage.user);
+            var DHeadImg = "/Img/DefaultImg/DHeadImg.jpg"
+            if (user.ValidateState == true) {
+                $("#Nick").html(user.Nick);
+                $("#sx").removeClass("hide");
+                $("#li_login").addClass("hide");
+                $("#li_registe").addClass("hide");
+                $("#li_quit").removeClass("hide");
+                $("#Nick").show();
+                $("#HeadImgSource_H").removeClass("hide");
+                if (user.HeadImgPath == "" || user.HeadImgPath == null) {
+                    user.HeadImgPath = DHeadImg;
+                }
+                $("#HeadImgSource_H").children().attr("src", user.HeadImgPath + '?' + Math.random());
+                $("#HeadImgSource_U").attr("src", user.HeadImgPath);
+                $("#HeadImgSource_H").children().css("background-size", "100%");
+            } else {
+                $("#li_quit").addClass("hide");
+                $("#Nick").hide();
+                $("#sx").addClass("hide");
+            }
+        } else {
+            $("#li_login").removeClass("hide");
+            $("#li_registe").removeClass("hide");
+        }
+        //设置选中页面的标签的颜色
+        if ($("#SY").val() == "SY") {
+            $("#li_SY").attr("class", "active");
+        } else if ($("#YM").val() == "ZPZS") {
+            $("#li_ZPZS").attr("class", "active");
+        } else if ($("#YM").val() == "ZXNS") {
+            $("#li_ZXNS").attr("class", "active");
+        } else if ($("#YM").val() == "LXWM") {
+            $("#li_LXWM").attr("class", "active");
+        } else if ($("#ZSWM").val() == "ZSWM") {
+            $("#li_ZSWM").attr("class", "active");
+        } else if ($("#YM").val() == "SJRZ") {
+            $("#li_SJRZ").attr("class", "active");
+        }
+
+        //置顶图标显示
+        $('#top-back').hide()
+        $(window).scroll(function () {
+            if ($(this).scrollTop() > 350) {
+                $("#top-back").fadeIn();
+            }
+            else {
+                $("#top-back").fadeOut();
+            }
+        });
+
+        //设置购物车清单数量
+        SetCartListNum();
+    });
+
+    //进入商家入驻界面
+    function GotoSJRZ() {
+        if (sessionStorage.user != "" && sessionStorage.user != null) {
+            window.location.href = "/Home/SJRZ";
+
+        } else {
+            layer.msg("请先登录...");
+            return false;
+        }
+
+    }
+
+    //进入用户信息界面
+    function GotoUserInfo() {
+        if (sessionStorage.user != null && sessionStorage.user != "") {
+            var user = JSON.parse(sessionStorage.user);
+            window.location.href = "/Home/UserInfoIndex?UserName=" + user.UserName;
+        }
+
+    }
+
+    //置顶事件
+    function topBack() {
+        $('body,html').animate({ scrollTop: 0 }, 300);
+    }
+
+</script>

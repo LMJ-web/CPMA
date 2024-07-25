@@ -1,0 +1,528 @@
+﻿@{
+    ViewBag.Title = "ShowGoodsIndex";
+}
+
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>商品详情页面</title>
+    <link href="~/PageUI/ShowGoodsIndex/css/shopdetail.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" type="text/css" href="~/PageUI/MyInfoIndexUi/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="~/layui/css/layui.css" />
+    <link rel="stylesheet" type="text/css" href="~/PageUI/ShowGoodsIndex/css/style.css" />
+    <!--选项卡-->
+    <link href="~/PageUI/MyInfoIndexUi/css/style.css" rel="stylesheet" type="text/css" />
+    <!--规格选项-->
+    <link href="~/PageUI/ShowGoodsIndex_Option/css/demo.css" rel="stylesheet" type="text/css" />
+
+</head>
+
+<body>
+
+    <!-----商品详情部分------->
+    <div class="shopdetails">
+        <!-------放大镜-------->
+        <div id="leftbox" class="layui-anim layui-anim-upbit">
+            <input class="GoodsId" type="text" value="@ViewBag.Goods.GoodsId" hidden>
+            <input class="ShopId" type="text" value="@ViewBag.Shop.ShopId" hidden>
+            <input class="GoodsPrice" type="text" value="@ViewBag.Goods.GoodsPrice" hidden>
+            <input class="GoodsFMImgPath" type="text" value="@ViewBag.Goods.GoodsFMImgPath" hidden>
+            <input class="GoodsShowImgPath" type="text" value="@ViewBag.Goods.GoodsShowImgPath" hidden>
+            <div id="showbox">
+                @*动态添加*@
+                <img src="/PageUI/ShowGoodsIndex/images/shopdetail/img01.png" width="400" height="500" />
+                <img src="/PageUI/ShowGoodsIndex/images/shopdetail/img02.png" width="400" height="500" />
+                <img src="/PageUI/ShowGoodsIndex/images/shopdetail/img03.png" width="400" height="500" />
+                <img src="/PageUI/ShowGoodsIndex/images/shopdetail/img04.png" width="400" height="500" />
+                <img src="/PageUI/ShowGoodsIndex/images/shopdetail/img05.png" width="400" height="500" />
+                <img src="/PageUI/ShowGoodsIndex/images/shopdetail/img01.png" width="400" height="500" />
+            </div>
+            <!--展示图片盒子-->
+            <div id="showsum">
+                @*动态添加*@
+            </div>
+            <!--展示图片里边-->
+            <p class="showpage">
+                <a href="javascript:void(0);" id="showlast"> < </a>
+                <a href="javascript:void(0);" id="shownext"> > </a>
+            </p>
+
+        </div>
+        <!----中间----->
+        <div class="centerbox layui-anim layui-anim-scale">
+            <p class="GoodsName">@ViewBag.Goods.GoodsName</p>
+            @*<p style="background:rgba(232,232,232,0.5);margin-bottom:10px">价格：<samp>￥@ViewBag.Goods.GoodsPrice</samp></p>*@
+            <input class="GoodsMinPrice" value="@ViewBag.Goods.GoodsMinPrice" hidden />
+            @{
+                if (ViewBag.Goods.GoodsMinPrice != 0)
+                {
+                    <p class="GoodsMinPrice" style=" margin-bottom: 10px;">促销价：<samp>￥@ViewBag.Goods.GoodsMinPrice</samp></p>
+                }
+            }
+            @*<p class="youhui">店铺优惠：<samp>购物满两件打八折</samp></p>*@
+            <p style="text-align:right">
+                <a href="#"><img src="/PageUI/ShowGoodsIndex/images/shopdetail/tell07.png"></a>
+            </p>
+            @*<ul>
+                <li class="kuanshi">款式：</li>
+                <li class="now shopimg"><a href="#" title="熊猫套装"><img src="/PageUI/ShowGoodsIndex/images/shopdetail/kuanshi01.jpg" width="45"></a></li>
+                <li class="shopimg"><a href="#" title="铁塔套装"><img src="/PageUI/ShowGoodsIndex/images/shopdetail/kuanshi02.jpg" width="45"></a></li>
+                <li class="shopimg"><a href="#" title="创意胡子"><img src="/PageUI/ShowGoodsIndex/images/shopdetail/kuanshi03.jpg" width="45"></a></li>
+                <li class="shopimg"><a href="#" title="四色小猫"><img src="/PageUI/ShowGoodsIndex/images/shopdetail/kuanshi04.jpg" width="45"></a></li>
+            </ul>*@
+            <div class="clear"></div>
+            <!--规格选项-->
+            <div id="wrap">
+                <div id="top">
+                    <p id='model'>
+                        <font>型号</font>
+                        <span>小</span>
+                        <span>中</span>
+                        <span>大</span>
+                    </p>
+                    <p id='color'>
+                        <font>颜色</font>
+                        <span>蓝色</span>
+                        <span>红色</span>
+                        <span>银色</span>
+                        <span>金色</span>
+                        <span>深空灰色</span>
+                    </p>
+                    <p id='rom'>
+                        <font>内存</font>
+                        <span>16GB</span>
+                        <span>64GB</span>
+                        <span>128GB</span>
+                    </p>
+                    <p id='banben'>
+                        <font>版本</font>
+                        <span>公开版</span>
+                        <span>移动赠费版</span>
+                        <span>联通合约版</span>
+                    </p>
+                </div>
+                <div id="bottom">
+                    <p>价格： <font>￥ <span id='goods_price'>@ViewBag.Goods.GoodsPrice</span>.00</font>
+                </div>
+            </div>
+            <p class="buy" onclick="SureBuy(@ViewBag.Goods.GoodsId);">
+                <a href="javascript:#" id="firstbuy">立即购买</a>
+                <a href="javascript:#" onclick="AddInCart(@ViewBag.Goods.GoodsId)">加入购物车</a>
+            </p>
+            <div class="clear"></div>
+            <p class="fuwu">服务承诺：</p>
+            <p class="pay">支付方式：</p>
+            <p class="kefu">客服：</p>
+        </div>
+
+        <!-----右边------->
+        <div class="rightbox">
+            <p class="leftname">- - 热卖电子产品 - -</p>
+            <img src="/Img/HotGoods/hot_buy_goods1.JPG" width="130" height="180">
+            <p style="color:red">￥35元</p>
+
+            <img src="/Img/HotGoods/hot_buy_goods2.JPG" width="130" height="180">
+            <p style="color:red">￥20元</p>
+
+
+            <img src="/Img/HotGoods/hot_buy_goods3.JPG" width="130" height="180">
+            <p style="color:red">￥8元</p>
+        </div>
+
+    </div>
+    <!-----商品详情部分结束------->
+    <div class="floor-course">
+        <div class="floor-content">
+            <div class="floor-side">
+                <div class="classify">
+                    <div class="shopim">
+                        <p class="leftname ShopName">@ViewBag.Shop.ShopName<img src="/PageUI/ShowGoodsIndex/images/shopdetail/tell01.png" width="22" height="22"></p>
+                        <img src="/PageUI/ShowGoodsIndex/images/shopdetail/tellbottom.png">
+                        <p class="sc" onclick="CollectShop(@ViewBag.Shop.ShopId)"><a href="javascript:0;">收藏店铺</a></p>
+                        <p class="sc"><a href="javascript:0;">进入店铺</a></p>
+                        <div class="search">
+                            <input class="left" type="text" />
+                            <input class="right" type="button" style=" cursor:pointer;" value="" />
+                        </div>
+                    </div>
+                    <div class="shopfl">
+                        <p class="leftname">本店分类</p>
+                        <ul>
+                            <li><a><img src="/PageUI/ShowGoodsIndex/images/shopdetail/tell02.png" width="10" height="10">全部商品</a></li>
+                            <li><a><img src="/PageUI/ShowGoodsIndex/images/shopdetail/tell02.png" width="10" height="10">电脑整机</a></li>
+                            <li><a><img src="/PageUI/ShowGoodsIndex/images/shopdetail/tell02.png" width="10" height="10">电脑配件</a></li>
+                            <li><a><img src="/PageUI/ShowGoodsIndex/images/shopdetail/tell02.png" width="10" height="10">外设产品</a></li>
+                            <li><a><img src="/PageUI/ShowGoodsIndex/images/shopdetail/tell02.png" width="10" height="10">游戏装备</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="floor-side-right">
+                <div class="hd floor-side-list">
+                    <ul>
+                        <li class="on">商品详情</li>
+                        <li>累计评价</li>
+                        <li>商品推荐</li>
+                    </ul>
+                    <a href="javascript:0;" class="slide-more">更多>></a>
+                </div>
+                <div class="bd floor-side-body">
+                    <ul>
+                        <li style="height:auto;width:auto">
+                            <div class="panelContainer">
+                                <div class="panel" id="panel01">
+                                    <p class="sell">商品描述</p>
+                                    <p>创意造型 浓浓文艺气息 闲暇时光 与好友分享</p>
+                                    <p></p>
+                                    <p class="sell">整体款式</p>
+                                    <img src="/PageUI/ShowGoodsIndex/images/shopdetail/evaluate101.jpg">
+                                    <img src="/PageUI/ShowGoodsIndex/images/shopdetail/evaluate102.jpg">
+                                    <img src="/PageUI/ShowGoodsIndex/images/shopdetail/evaluate103.jpg">
+                                    <img src="/PageUI/ShowGoodsIndex/images/shopdetail/evaluate104.jpg">
+                                    <img src="/PageUI/ShowGoodsIndex/images/shopdetail/evaluate105.jpg">
+                                    <img src="/PageUI/ShowGoodsIndex/images/shopdetail/evaluate106.jpg">
+                                    <div class="clear"></div>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                    <ul>
+                        <li style="height:auto;width:910px">
+                            <div class="panel" id="panel02" style="overflow-y:scroll;height:590px;">
+                                <p class="sell">买家评价</p>
+                                <img src="/PageUI/ShowGoodsIndex/images/shopdetail/detail101.png">
+                                <p class="judge">全部评价(20)<span>晒图(13)</span></p>
+
+                                <div class="judge01">
+                                    <div class="idimg"><img src="/PageUI/ShowGoodsIndex/images/shopdetail/detail102.png"></div>
+                                    <div class="write">
+                                        <p class="idname">落***1</p>
+                                        <p>杯子很可爱！就是有两三个杯子后面的小图案有一丢丢斜下来，不过没多大关系，其他的还好。有一点真的特别特别好的就是😂包裹的非常非常非常严实，简直就是里三层外三层！杯子完好无损，赠送的刷子也包装的很好😂让我第一眼以为那是一个棉花糖hhh</p>
+                                        <p class="which">颜色:创意胡子</p>
+                                        <img src="/PageUI/ShowGoodsIndex/images/shopdetail/detail103.jpg" width="40px" height="40px">
+                                        <img src="/PageUI/ShowGoodsIndex/images/shopdetail/detail104.jpg" width="40px" height="40px">
+                                        <img src="/PageUI/ShowGoodsIndex/images/shopdetail/detail105.jpg" width="40px" height="40px">
+
+                                    </div>
+                                </div>
+                                <div class="judge01">
+                                    <div class="idimg"><img src="/PageUI/ShowGoodsIndex/images/shopdetail/detail102.png"></div>
+                                    <div class="write">
+                                        <p class="idname">席***2</p>
+                                        <p>质量很好，快递也很快，拆包裹很艰难～～～包得太好了，没有碎。厚度也可以。值得购买！</p>
+                                        <p class="which">颜色:熊猫套装</p>
+                                        <img src="/PageUI/ShowGoodsIndex/images/shopdetail/detail106.jpg" width="40px" height="40px">
+                                        <img src="/PageUI/ShowGoodsIndex/images/shopdetail/detail107.jpg" width="40px" height="40px">
+                                    </div>
+                                </div>
+                                <div class="judge01">
+                                    <div class="idimg"><img src="/PageUI/ShowGoodsIndex/images/shopdetail/detail102.png"></div>
+                                    <div class="write">
+                                        <p class="idname">怒***4</p>
+                                        <p>特别好，必须赞👍，质量好，很漂亮，快递也好快的。还挺优惠。看图吧。</p>
+                                        <p class="which">颜色:熊猫套装</p>
+                                        <img src="/PageUI/ShowGoodsIndex/images/shopdetail/detail108.jpg" width="40px" height="40px">
+                                        <img src="/PageUI/ShowGoodsIndex/images/shopdetail/detail109.jpg" width="40px" height="40px">
+                                        <img src="/PageUI/ShowGoodsIndex/images/shopdetail/detail110.jpg" width="40px" height="40px">
+                                    </div>
+                                </div>
+                                <div class="judge01">
+                                    <div class="idimg"><img src="/PageUI/ShowGoodsIndex/images/shopdetail/detail102.png"></div>
+                                    <div class="write">
+                                        <p class="idname">怒***4</p>
+                                        <p>特别好，必须赞👍，质量好，很漂亮，快递也好快的。还挺优惠。看图吧。</p>
+                                        <p class="which">颜色:熊猫套装</p>
+                                        <img src="/PageUI/ShowGoodsIndex/images/shopdetail/detail108.jpg" width="40px" height="40px">
+                                        <img src="/PageUI/ShowGoodsIndex/images/shopdetail/detail109.jpg" width="40px" height="40px">
+                                        <img src="/PageUI/ShowGoodsIndex/images/shopdetail/detail110.jpg" width="40px" height="40px">
+                                    </div>
+                                </div>
+                                <div class="judge01">
+                                    <div class="idimg"><img src="/PageUI/ShowGoodsIndex/images/shopdetail/detail102.png"></div>
+                                    <div class="write">
+                                        <p class="idname">里***2</p>
+                                        <p>不错，很可爱包装很好，赶快下手吧</p>
+                                        <p class="which">颜色:四色小猫</p>
+                                        <img src="/PageUI/ShowGoodsIndex/images/shopdetail/detail103.jpg" width="40px" height="40px">
+                                        <img src="/PageUI/ShowGoodsIndex/images/shopdetail/detail104.jpg" width="40px" height="40px">
+                                    </div>
+                                </div>
+                                <div class="judge01">
+                                    <div class="idimg"><img src="/PageUI/ShowGoodsIndex/images/shopdetail/detail102.png"></div>
+                                    <div class="write">
+                                        <p class="idname">啥***2</p>
+                                        <p>一直想要咖啡杯，这次总算拿到手了。很不错的陶瓷杯。图案也很可爱。实物与图一样。</p>
+                                        <p class="which">颜色:熊猫套装</p>
+                                        <img src="/PageUI/ShowGoodsIndex/images/shopdetail/detail108.jpg" width="40px" height="40px">
+                                        <img src="/PageUI/ShowGoodsIndex/images/shopdetail/detail110.jpg" width="40px" height="40px">
+                                    </div>
+                                </div>
+                                <div class="judge01">
+                                    <div class="idimg"><img src="/PageUI/ShowGoodsIndex/images/shopdetail/detail102.png"></div>
+                                    <div class="write">
+                                        <p class="idname">毛***字</p>
+                                        <p>很精致，用起来很满意，做工也非常的细致，用着很满意哦，非常值得购买</p>
+                                        <p class="which">颜色:创意胡子</p>
+                                        <img src="/PageUI/ShowGoodsIndex/images/shopdetail/detail103.jpg" width="40px" height="40px">
+                                        <img src="/PageUI/ShowGoodsIndex/images/shopdetail/detail104.jpg" width="40px" height="40px">
+                                    </div>
+                                </div>
+                                <div class="judge01">
+                                    <div class="idimg"><img src="/PageUI/ShowGoodsIndex/images/shopdetail/detail102.png"></div>
+                                    <div class="write">
+                                        <p class="idname">轻***4</p>
+                                        <p>店家服务太贴心了，没有破碎，包装非常严实</p>
+                                        <p class="which">颜色:铁塔套装</p>
+                                        <img src="/PageUI/ShowGoodsIndex/images/shopdetail/detail106.jpg" width="40px" height="40px">
+                                        <img src="/PageUI/ShowGoodsIndex/images/shopdetail/detail107.jpg" width="40px" height="40px">
+                                    </div>
+                                </div>
+                                <div class="clear"></div>
+                            </div>
+                        </li>
+                    </ul>
+                    <ul>
+                        <li>
+                            <a href="#">
+                                <div class="image-ti">
+                                    <img src="/PageUI/ShowGoodsIndex/images/index_img/content_11.jpg">
+                                </div>
+                                <p class="slide-title">财务经理带你进行年终结账</p>
+                                <p class="slide-body">
+                                    <span class="slide-body-nub">
+                                        <i class="slide-body-nub-icon"></i>
+                                        收藏数:450
+
+                                    </span>
+                                    <span class="slide-body-price slide-admission">购买</span>
+                                </p>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <div class="image-ti">
+                                    <img src="/PageUI/ShowGoodsIndex/images/index_img/content_11.jpg" alt="">
+                                </div>
+                                <p class="slide-title">焊工特种作业操作证</p>
+                                <p class="slide-body">
+                                    <span class="slide-body-nub">
+                                        <i class="slide-body-nub-icon"></i>
+                                        450
+
+                                    </span>
+                                    <span class="slide-body-nup">
+                                        <i class="slide-body-nup-icon"></i>
+                                        230
+
+                                    </span>
+                                    <span class="slide-body-price slide-admission">免费</span>
+                                </p>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <div class="image-ti">
+                                    <img src="/PageUI/ShowGoodsIndex/images/index_img/content_11.jpg" alt="">
+                                </div>
+                                <p class="slide-title">焊工特种作业操作证</p>
+                                <p class="slide-body">
+                                    <span class="slide-body-nub">
+                                        <i class="slide-body-nub-icon"></i>
+                                        450
+
+                                    </span>
+                                    <span class="slide-body-nup">
+                                        <i class="slide-body-nup-icon"></i>
+                                        230
+
+                                    </span>
+                                    <span class="slide-body-price slide-admission">免费</span>
+                                </p>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <div class="image-ti">
+                                    <img src="/PageUI/ShowGoodsIndex/images/index_img/content_11.jpg" alt="">
+                                </div>
+                                <p class="slide-title">焊工特种作业操作证</p>
+                                <p class="slide-body">
+                                    <span class="slide-body-nub">
+                                        <i class="slide-body-nub-icon"></i>
+                                        450
+
+                                    </span>
+                                    <span class="slide-body-nup">
+                                        <i class="slide-body-nup-icon"></i>
+                                        230
+
+                                    </span>
+                                    <span class="slide-body-price slide-admission">免费</span>
+                                </p>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <div class="image-ti">
+                                    <img src="/PageUI/ShowGoodsIndex/images/index_img/content_11.jpg" alt="">
+                                </div>
+                                <p class="slide-title">焊工特种作业操作证</p>
+                                <p class="slide-body">
+                                    <span class="slide-body-nub">
+                                        <i class="slide-body-nub-icon"></i>
+                                        450
+
+                                    </span>
+                                    <span class="slide-body-nup">
+                                        <i class="slide-body-nup-icon"></i>
+                                        230
+
+                                    </span>
+                                    <span class="slide-body-price slide-admission">免费</span>
+                                </p>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <div class="image-ti">
+                                    <img src="/PageUI/ShowGoodsIndex/images/index_img/content_11.jpg" alt="">
+                                </div>
+                                <p class="slide-title">焊工特种作业操作证</p>
+                                <p class="slide-body">
+                                    <span class="slide-body-nub">
+                                        <i class="slide-body-nub-icon"></i>
+                                        450
+
+                                    </span>
+                                    <span class="slide-body-nup">
+                                        <i class="slide-body-nup-icon"></i>
+                                        230
+
+                                    </span>
+                                    <span class="slide-body-price slide-admission">免费</span>
+                                </p>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <div class="image-ti">
+                                    <img src="/PageUI/ShowGoodsIndex/images/index_img/content_11.jpg" alt="">
+                                </div>
+                                <p class="slide-title">焊工特种作业操作证</p>
+                                <p class="slide-body">
+                                    <span class="slide-body-nub">
+                                        <i class="slide-body-nub-icon"></i>
+                                        450
+
+                                    </span>
+                                    <span class="slide-body-nup">
+                                        <i class="slide-body-nup-icon"></i>
+                                        230
+
+                                    </span>
+                                    <span class="slide-body-price slide-admission">免费</span>
+                                </p>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <div class="image-ti">
+                                    <img src="/PageUI/ShowGoodsIndex/images/index_img/content_11.jpg" alt="">
+                                </div>
+                                <p class="slide-title">焊工特种作业操作证</p>
+                                <p class="slide-body">
+                                    <span class="slide-body-nub">
+                                        <i class="slide-body-nub-icon"></i>
+                                        450
+
+                                    </span>
+                                    <span class="slide-body-nup">
+                                        <i class="slide-body-nup-icon"></i>
+                                        230
+
+                                    </span>
+                                    <span class="slide-body-price slide-admission">免费</span>
+                                </p>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
+
+<!----------------JS------------------>
+<script src="../PageUI/MyInfoIndexUi/js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../PageUI/ShowGoodsIndex/js/jquery.SuperSlide.2.1.1.js" type="text/javascript"></script>
+<script src="../PageUI/MyInfoIndexUi/js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../PageUI/ShowGoodsIndex/js/common.js" type="text/javascript"></script>
+<script src="../PageUI/ShowGoodsIndex/js/ShowGoodsIndex.js" type="text/javascript"></script>
+<script src="~/layui/layui.all.js" type="text/javascript" charset="utf-8"></script>
+<!--规格选项-->
+<script src="~/PageUI/ShowGoodsIndex_Option/js/jquery.qrcode.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="~/PageUI/ShowGoodsIndex_Option/js/Option.js" type="text/javascript" charset="utf-8"></script>
+
+<script type="text/javascript">
+
+    //预加载
+    $(function () {
+        //参数定义
+        var showproduct = {
+            "boxid": "showbox",
+            "sumid": "showsum",
+            "boxw": 400,
+            "boxh": 500,
+            "sumw": 60,//列表每个宽度,该版本中请把宽高填写成一样
+            "sumh": 60,//列表每个高度,该版本中请把宽高填写成一样
+            "sumi": 7,//列表间隔
+            "sums": 5,//列表显示个数
+            "sumsel": "sel",
+            "sumborder": 1,//列表边框，没有边框填写0，边框在css中修改
+            "lastid": "showlast",
+            "nextid": "shownext"
+        };
+
+        SetGoodsShowImg();
+
+        $.ljsGlasses.pcGlasses(showproduct);//方法调用，务必在加载完后执行
+
+        $('.tabs a').click(function () {
+
+            var $this = $(this);
+            $('.panel').hide();
+            $('.tabs a.active').removeClass('active');
+            $this.addClass('active').blur();
+            var panel = $this.attr("href");
+            $(panel).show();
+            //return fasle;  //告诉浏览器  不要指向这个链接
+        });//end click
+
+        $(".tabs li:first a").click();   //web 浏览器，单击第一个标签吧
+
+        $(".centerbox li").click(function () {
+            $("li").removeClass("now");
+            $(this).addClass("now")
+
+        });
+    });
+
+    jQuery(".floor-side-right").slide({
+        effect: "fade",
+        autoPlay: false,
+        trigger: "mouseover",
+        delayTime: 700
+    });
+
+    if (sessionStorage.user != null && sessionStorage.user != "") {
+        var user = JSON.parse(sessionStorage.getItem("user"));
+    }
+
+    if ($("#GoodsMinPrice").val() == "0") {
+        $(".GoodsPrice").removeClass("GoodsPrice");
+    }
+</script>
+

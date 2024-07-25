@@ -1,0 +1,103 @@
+﻿body {
+}
+
+.navbar-default {
+	background-color: rgba(255, 255, 255, 0.9);
+	border: 0;
+	height: 80px;
+	line-height: 100px;
+}
+.navbar-brand {
+	height: 100px;
+	padding: 25px 15px;
+}
+.navbar-default .navbar-nav>.active>a,
+.navbar-default .navbar-nav>.active>a:focus,
+.navbar-default .navbar-nav>.active>a:hover {
+	color: #cf0f32;
+	background: none;
+}
+.navbar-default .navbar-nav>li>a:hover{
+	color: #cf0f32;
+} 
+.navbar-nav>li>a {
+	line-height: 50px;
+}
+.navbar-default .navbar-nav>li>a {
+	color: #000;
+}
+.nav>li>a {
+	padding: 10px 12px;
+	display: inline-block;
+}
+
+.navbar-default .navbar-nav>li.lang {
+	margin-left: 20px;
+}
+
+.navbar-default .navbar-nav>li.lang>a {
+	color: #cccccc;
+}
+
+.navbar-default .navbar-nav>li.lang>a.active {
+	color: #000000;
+}
+
+.navbar-right {
+	margin-right: -10px;
+}
+/*手机*/
+
+@media (max-width: 767px) {
+	.navbar-default {
+		background-color: rgba(255, 255, 255, 0.9);
+		border: 0;
+		height: 50px;
+		line-height: 50px;
+	}
+	.navbar-brand {
+		height: 50px;
+		padding: 10px 15px;
+	}
+	.navbar-brand>img {
+		width: 60%;
+	}
+	.carousel-inner>.item>a>img,
+	.carousel-inner>.item>img,
+	.img-responsive,
+	.thumbnail a>img,
+	.thumbnail>img {
+		min-height: 250px;
+	}
+	.left_arrow,
+	.right_arrow {
+		/*top: 50%;*/
+		top:100px;
+	}
+	.carousel-control.right {
+		right: 10px;
+	}
+	.navbar-default .navbar-collapse,
+	.navbar-default .navbar-form {
+		background-color: rgba(255, 255, 255, 0.9);
+	}
+	.navbar-nav {
+		margin: 0;
+	}
+	.navbar-nav>li>a {
+		line-height: 20px;
+	}
+	.navbar-default .navbar-nav>li.lang {
+		margin-left: 0px;
+	}
+
+	
+}
+
+
+/*平板*/
+
+@media (min-width:768px) and (max-width: 992px) {
+	.nav>li>a{padding: 10px 6px;}
+	
+}

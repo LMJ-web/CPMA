@@ -1,0 +1,155 @@
+﻿@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>编辑商品的模板</title>
+    <link rel="stylesheet" type="text/css" href="~/layui/css/layui.css" />
+    <style>
+        .hide {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    @{
+        var goods=ViewBag.Goods;
+        if (goods != null)
+        {
+                <div class="layui-form layui-form-pane" style="margin:10px;">
+                    <div class="layui-form-item hide">
+                        <div class="layui-input-inline">
+                            <input id="GoodsId" type="text" class="layui-input" value="@ViewBag.Goods.Data.GoodsId">
+                            <input id="GoodsModel_ShopSel" type="text" class="layui-input" value="@ViewBag.Goods.Data.ShopId">
+                        </div>
+                    </div>
+
+                    <div class="layui-form-item" style="margin-top:5px">
+                        <label class="layui-form-label">商品名</label>
+                        <div class="layui-input-inline">
+                            <input id="GoodsName" type="text" placeholder="商品名" class="layui-input" value="@ViewBag.Goods.Data.GoodsName">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">类别</label>
+                        <input id="input_categoryId" type="text" value="@ViewBag.Goods.Data.CategoryId" hidden>
+                        <div class="layui-input-inline">
+                            <select id="GoodsModel_GoodsCategorySel" lay-verify="required" lay-search=""></select>
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">价格</label>
+                        <div class="layui-input-inline">
+                            <input id="GoodsPrice" type="text" placeholder="价格" class="layui-input" value="@ViewBag.Goods.Data.GoodsPrice">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">促销价</label>
+                        <div class="layui-input-inline">
+                            <input id="GoodsMinPrice" type="text" placeholder=" 促销价" class="layui-input" value="@ViewBag.Goods.Data.GoodsMinPrice">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">热门状态</label>
+                        <div class="layui-input-inline">
+                            <input id="HotState" type="text" placeholder="0或1" class="layui-input " value="@ViewBag.Goods.Data.HotState">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">封面图</label>
+                        <div class="layui-upload">
+                            <button type="button" class="layui-btn layui-btn-normal" id="GoodsModifyInfoForm_FMImgSeleBtn">封面图上传</button>
+                            <div class="layui-upload-list">
+                                <input id="GoodsModifyInfoForm_FMImg_input" type="text" value="@ViewBag.Goods.Data.GoodsFMImgPath" hidden />
+                                <blockquote class="layui-elem-quote layui-quote-nm" style="margin-top: 10px;">
+                                    <img id="GoodsModifyInfoForm_FMImg" class="layui-upload-img" style="width:100px;height:100px;" src="" />
+                                    <p id="demoText"></p>
+                                    <div class="layui-upload-list" id="demo"></div>
+                                </blockquote>
+                            </div> 
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label" style="width:-webkit-fill-available">商品简介</label>
+                        <textarea id="GoodsIntroduce" type="text" class="layui-textarea " placeholder="请输入简介">@ViewBag.Goods.Data.GoodsIntroduce</textarea>
+                    </div>
+                </div>
+                <div class="layui-form-item layui-form-text">
+                    <div style="text-align:center;">
+                        <button class="layui-btn layui-btn-normal layui-btn-radius" onclick="SureUpdate()">确认</button>
+                        <button class="layui-btn layui-btn-danger  layui-btn-radius" id="CloseIframe">取消</button>
+                    </div>
+                </div>
+        }
+    }
+
+</body>
+</html>
+<script src="~/PageUI/MyInfoIndexUi/js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="~/layui/layui.js" type="text/javascript" charset="utf-8"></script>
+<script src="~/Admin/page/goods/addGoodsModel.js" type="text/javascript" charset="utf-8"></script>
+<script>
+    $(function () {
+        GetGoodsCategoryToSel();
+
+        //设定类别的值
+        $("#GoodsModel_GoodsCategorySel").val($("#input_categoryId").val());
+        $("#GoodsModel_GoodsCategorySel").next().children().eq(1).children().eq(parseInt($("#input_categoryId").val())).click();
+        //设置封面图
+        if ($("#GoodsModifyInfoForm_FMImg_input").val() == "" || $("#GoodsModifyInfoForm_FMImg_input").val() == null) {
+            $("#GoodsModifyInfoForm_FMImg").attr("src", "/Img/DefaultImg/GoodsFMImg.jpg" + '?' + Math.random());
+
+        } else {
+            $("#GoodsModifyInfoForm_FMImg").attr("src", $("#GoodsModifyInfoForm_FMImg_input").val() + '?' + Math.random());
+        }
+
+        //文件上传
+        layui.use('upload', function () {
+            var $ = layui.jquery
+            , upload = layui.upload;
+
+            //商品封面图片上传
+            var goodsFMupload = upload.render({
+                elem: '#GoodsModifyInfoForm_FMImgSeleBtn'
+              , url: "/Shop/UploadGoodsFMImg"
+              , method: 'post'
+              , accept: "images"
+              , before: function (obj) {
+                  //预读本地文件示例，不支持ie8
+                  this.data = { "UserName": "", "GoodsId": $("#GoodsId").val() };//额外参数关键代码
+                  //obj.preview(function (index, file, result) {
+                  //    $('#demo1').attr('src', result); //图片链接（base64）
+                  //});
+              }
+              , done: function (data) {
+                  //上传成功
+                  if (data == true) {
+                      $("#GoodsModifyInfoForm_FMImg").attr("src", $("#GoodsModifyInfoForm_FMImg_input").val() + '?' + Math.random());
+                      return layer.msg("封面已上传成功！");
+                  } else {
+                      //如果上传失败
+                      return layer.msg('上传失败');
+                  }
+              }
+              , error: function () {
+                  //失败状态，并实现重传
+                  var demoText = $('#demoText');
+                  demoText.html('<span style="color: #FF5722;">上传失败</span> <br/><a class="layui-btn layui-btn-mini demo-reload layui-btn-normal">重试</a>');
+                  demoText.find('.demo-reload').on('click', function () {
+                      uploadInst.upload();
+                  });
+              }
+            });
+        });
+    });
+
+    //关闭点击事件的绑定
+    $('#CloseIframe').click(function () {
+        //注意：parent 是 JS 自带的全局对象，可用于操作父页面
+        var index = parent.layer.getFrameIndex(window.name); //获取窗口索引
+        parent.layer.close(index);
+    });
+
+</script>

@@ -1,0 +1,91 @@
+﻿@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>评论层模板</title>
+    <link rel="stylesheet" type="text/css" href="~/layui/css/layui.css" />
+</head>
+<body>
+    <div class="layui-form-item layui-form-text">
+        <label class="layui-form-label">满意度</label>
+        <div class="layui-input-block">
+            <input tyep="text" id="StarsVal" value="0" hidden/>
+            <div id="Stars"></div>
+        </div>
+    </div>
+    <div class="layui-form-item layui-form-text">
+        <label class="layui-form-label">评价</label>
+        <div class="layui-input-block" style="width:400px;">
+            <textarea placeholder="请输入评价内容" class="layui-textarea" id="EvaluateContent"></textarea>
+        </div>
+    </div>
+    <div class="layui-form-item layui-form-text">
+        <div style="width:600px;text-align:center;">
+            <button class="layui-btn layui-btn-normal layui-btn-radius" onclick="SureEvaluate('@ViewBag.ShopReservationId')">确认</button>
+            <button class="layui-btn layui-btn-danger  layui-btn-radius"  id="CloseIframe">取消</button>
+        </div>
+    </div>
+</body>
+</html>
+<script src="~/PageUI/MyInfoIndexUi/js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="~/layui/layui.js" type="text/javascript" charset="utf-8"></script>
+<script>
+    layui.use(['rate'], function () {
+        var rate = layui.rate;
+        //半星效果
+        rate.render({
+            elem: '#Stars'
+          , value: 3//初始值
+          , half: true //开启半星
+          , choose: function (value) {
+              $("#StarsVal").val(value);
+          }
+        })
+    });
+    $('#CloseIframe').click(function () {
+        //注意：parent 是 JS 自带的全局对象，可用于操作父页面
+        var index = parent.layer.getFrameIndex(window.name); //获取窗口索引
+        parent.layer.close(index);
+    });
+    function SureEvaluate(ShopReservationId) {
+        //注意：parent 是 JS 自带的全局对象，可用于操作父页面
+        var index = parent.layer.getFrameIndex(window.name); //获取窗口索引
+        var starsVal = $('#StarsVal').val();
+        var evaluateContent = $('#EvaluateContent').val();
+
+        if (starsVal == '' || starsVal == null) {
+            parent.layer.msg('请选择满意度！');
+            return false;
+        }else if (evaluateContent == "" || evaluateContent == null) {
+            parent.layer.msg('请输入评价内容！');
+            return false;
+        }
+        $.ajax({
+            type: "post",
+            url: "/User/ModifyEvaluate",
+            data: {
+                ShopReservationId: parseInt(ShopReservationId),
+                EvaluateStars:parseFloat(starsVal),
+                EvaluateContent:evaluateContent
+            },
+            async: false,
+            success: function (data) {
+                if (data == "EC") {
+                    parent.layer.msg("评论异常！");
+                } else if (data == "true") {
+                    parent.layer.msg("评论成功！");
+                    $("#a_WOYY_Finish").click();
+                    //关闭iframe
+                    parent.layer.close(index);
+                } else {
+                    parent.layer.msg("评论失败！");
+                }
+            }
+        });
+      ;
+    }
+  
+</script>

@@ -1,0 +1,493 @@
+﻿@{
+    ViewBag.Title = "首页";
+}
+<!DOCTYPE html>
+<html id="html">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <title>星辰电脑维修-首页</title>
+    @Styles.Render("~/bundles/PageUI/MyInfoIndexUi/css", "~/bundles/PageUI/UserInfoIndex/css")
+    @*<link rel="stylesheet" type="text/css" href="~/PageUI/MyInfoIndexUi/css/bootstrap.min.css" />
+        <link rel="stylesheet" type="text/css" href="~/PageUI/MyInfoIndexUi/css/swiper.min.css" />
+        <link rel="stylesheet" type="text/css" href="~/PageUI/MyInfoIndexUi/css/animate.min.css">*@
+    <link rel="stylesheet" type="text/css" href="~/PageUI/MyInfoIndexUi/css/style.css" />
+    <link href="~/PageUI/IndexUI/css/Index.css" rel="stylesheet" type="text/css" />
+    <!--用户界面-->
+    @*<link rel="stylesheet" type="text/css" href="~/PageUI/UserInfoIndex/css/jiazaitoubu.css">
+        <link rel="stylesheet" type="text/css" href="~/PageUI/UserInfoIndex/css/css.css">
+        <link rel="stylesheet" type="text/css" href="~/PageUI/UserInfoIndex/css/center.css">*@
+    <link rel="stylesheet" type="text/css" href="~/layui/css/layui.css" media="all" />
+    <!--Shop筛选样式-->
+    <link href="~/PageUI/Shop筛选样式/css/style.css" rel="stylesheet" type="text/css" />
+    <!--三级城市选择-->
+    <link href="~/PageUI/CitySelectUI/css/city.css" rel="stylesheet" type="text/css" />
+    <!--搜索框自动提示-->
+    @*<link rel="stylesheet" href="//apps.bdimg.com/libs/jqueryui/1.10.4/css/jquery-ui.min.css">*@
+    <link href="~/Content/jquery-ui.min.css" rel="stylesheet" type="text/css" />
+
+    <link href="~/PageUI/SearchUI/搜索框提示功能/css/autocomplete.css" rel="stylesheet" type="text/css" />
+    <!--流加载-->
+    <link href="~/PageUI/WaterfallDataUi/css/base.css" rel="stylesheet" type="text/css" />
+    <link href="~/PageUI/WaterfallDataUi/css/index.css" rel="stylesheet" type="text/css" />
+
+    <style type="text/css">
+        .snow-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 100001;
+        }
+
+        .input {
+            width: 50px; /*必须设置宽度*/
+            overflow: hidden; /*溢出隐藏*/
+            text-overflow: ellipsis; /*以省略号...显示*/
+            white-space: nowrap; /*强制不换行*/
+        }
+    </style>
+
+</head>
+<body>
+    <!--首页-->
+    <div id="SY">
+        @*页面标志*@
+        <input type="text" id="SY" value="SY" hidden />
+        <!--最上層部分-->
+        <div class="SY_nav" style="">
+            <!--主要內容-->
+            <div style="width:100%;float:left">
+                <div class="center" style="width:100%">
+                    <!--左侧-->
+                    <div class="SY_left layui-anim layui-anim-upbit">
+                        <div class="dao_hang2">
+                            <div class="nav_css">
+                                <!--全部电子产品分类-->
+                                <div class="important">
+                                    <div style="width:100%">
+                                        <div class="center" style="width:150px;">
+                                            <img src="~/PageUI/UserInfoIndex/images/all_list.png">
+                                            &nbsp;电脑分类
+                                        </div>
+                                    </div>
+                                    <div class="aside">
+                                        <ul>
+                                            <li class="cates" mt-ct="list01">
+                                                <h3>电脑整机</h3>
+                                                <p>
+                                                    <a href="#">笔记本</a>
+                                                    <a href="#">台式机</a>
+                                                    <a href="#">游戏本</a>
+                                                    <a href="#">轻薄本</a>
+                                                    <a href="#">一体机</a>
+                                                    <a href="#">服务器</a>
+                                                    <!--<i style="font-family:'宋体';color:#666; line-height:23px; font-size:14px; float:left">></i>-->
+                                                </p>
+                                            </li>
+                                            <li class="cates" mt-ct="list02">
+                                                <h3>电脑配件</h3>
+                                                <p>
+                                                    <a href="#">CPU</a>
+                                                    <a href="#">SSD硬盘</a>
+                                                    <a href="#">显示器</a>
+                                                    <a href="#">显卡</a>
+                                                    <a href="#">组装电脑</a>
+                                                    <a href="#">机箱</a>
+                                                    <!--<i style="font-family:'宋体';color:#666; line-height:23px; font-size:14px; float:left">></i>-->
+                                                </p>
+                                            </li>
+                                            <li class="cates" mt-ct="list03">
+                                                <h3>外设产品</h3>
+                                                <p>
+                                                    <a href="#">鼠标</a>
+                                                    <a href="#">键盘</a>
+                                                    <a href="#">鼠标垫</a>
+                                                    <a href="#">U盘</a>
+                                                    <a href="#">移动硬盘</a>
+                                                    <a href="#">摄像头</a>
+                                                    <!--<i style="font-family:'宋体';color:#666; line-height:23px; font-size:14px; float:left">></i>-->
+                                                </p>
+                                            </li>
+                                            <li class="cates" mt-ct="list04">
+                                                <h3>游戏装备</h3>
+                                                <p>
+                                                    <a href="#">电竞显示器</a>
+                                                    <a href="#">机械键盘</a>
+                                                    <a href="#">游戏鼠标</a>
+                                                    <a href="#">游戏手柄</a>
+                                                    <a href="#">MOD</a>
+                                                    <a href="#">游戏电脑</a>
+                                                    <!--<i style="font-family:'宋体';color:#666; line-height:23px; font-size:14px; float:left">></i>-->
+                                                </p>
+                                            </li>
+
+                                        </ul>
+                                    </div>
+                                    <!--侧边栏的展开项-->
+                                    <div>
+                                        <div class="import_list b-list01">
+                                            <dl>
+                                                <dt>热门品牌：</dt>
+                                                <dd>
+                                                    <a href="#">华硕</a>
+                                                    <a href="#">联想</a>
+                                                    <a href="#">ThinkPad</a>
+                                                </dd>
+                                                <dd>
+                                                    <a href="#">惠普</a>
+                                                    <a href="#">戴尔</a>
+                                                    <a href="#">宏碁</a>
+                                                </dd>
+                                            </dl>
+                                            <dl>
+                                                <dt>热门分类：</dt>
+                                                <dd>
+                                                    <a href="#">游戏达人</a>
+                                                    <a href="#">时尚轻薄</a>
+                                                    <a href="#">校园学生</a>
+                                                </dd>
+                                                <dd>
+                                                    <a href="#">商用电脑</a>
+                                                    <a href="#">家用电脑</a>
+                                                    <a href="#">电脑主机</a>
+                                                </dd>
+                                            </dl>
+                                        </div>
+                                        <div class="import_list b-list02">
+                                            <dl>
+                                                <dt>热门品牌：</dt>
+                                                <dd>
+                                                    <a href="#">英特尔</a>
+                                                    <a href="#">三星</a>
+                                                    <a href="#">华硕</a>
+                                                </dd>
+                                                <dd>
+                                                    <a href="#">戴尔</a>
+                                                    <a href="#">AOC</a>
+                                                    <a href="#">金士顿</a>
+                                                </dd>
+                                            </dl>
+                                            <dl>
+                                                <dt>热门分类：</dt>
+                                                <dd>
+                                                    <a href="#">主板</a>
+                                                    <a href="#">硬盘</a>
+                                                    <a href="#">内存</a>
+                                                </dd>
+                                                <dd>
+                                                    <a href="#">电源</a>
+                                                    <a href="#">散热器</a>
+                                                    <a href="#">装机配件</a>
+                                                </dd>
+                                            </dl>
+                                        </div>
+                                        <div class="import_list b-list03">
+                                            <dl>
+                                                <dt>热门品牌：</dt>
+                                                <dd>
+                                                    <a href="#">罗技</a>
+                                                    <a href="#">雷蛇</a>
+                                                    <a href="#">雷柏</a>
+                                                </dd>
+                                                <dd>
+                                                    <a href="#">金士顿</a>
+                                                    <a href="#">闪迪</a>
+                                                    <a href="#">希捷</a>
+                                                </dd>
+                                            </dl>
+                                            <dl>
+                                                <dt>热门分类：</dt>
+                                                <dd>
+                                                    <a href="#">机械键盘</a>
+                                                    <a href="#">无线鼠标</a>
+                                                    <a href="#">游戏鼠标</a>
+                                                </dd>
+                                                <dd>
+                                                    <a href="#">硬盘盒</a>
+                                                    <a href="#">手机U盘</a>
+                                                    <a href="#">NAS</a>
+                                                </dd>
+                                            </dl>
+                                        </div>
+                                        <div class="import_list b-list04">
+                                            <dl>
+                                                <dt>热门品牌：</dt>
+                                                <dd>
+                                                    <a href="#">外星人</a>
+                                                    <a href="#">Acer</a>
+                                                    <a href="#">Dell</a>
+                                                </dd>
+                                                <dd>
+                                                    <a href="#">玩家国度</a>
+                                                    <a href="#">雷蛇</a>
+                                                    <a href="#">美商海盗船</a>
+                                                </dd>
+                                            </dl>
+                                            <dl>
+                                                <dt>游戏必备：</dt>
+                                                <dd>
+                                                    <a href="#">游戏显卡</a>
+                                                    <a href="#">游戏显示器</a>
+                                                    <a href="#">游戏鼠标</a>
+                                                </dd>
+                                                <dd>
+                                                    <a href="#">机械键盘</a>
+                                                    <a href="#">游戏本</a>
+                                                    <a href="#">游戏组装机</a>
+                                                </dd>
+                                            </dl>
+                                            <dl>
+                                                <dt>游戏潮品：</dt>
+                                                <dd>
+                                                    <a href="#">平衡车</a>
+                                                    <a href="#">组装机</a>
+                                                    <a href="#">电竞耳机</a>
+                                                </dd>
+                                                <dd>
+                                                    <a href="#">XBOX</a>
+                                                    <a href="#">Playstation</a>
+                                                </dd>
+                                            </dl>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--中间代码-->
+                    <div class="SY_mainsourse layui-anim layui-anim-upbit">
+                        <!--banner-->
+                        <div class="layui-carousel mainbanner layui-anim layui-anim-fadein" id="mainbanner">
+                            <div carousel-item>
+                                <div>
+                                    <img src="/PageUI/UserInfoIndex/images/gg1.jpg" style="width:100%;height:100%" />
+                                </div>
+                                <div>
+                                    <img src="/PageUI/UserInfoIndex/images/gg2.jpg" style="width: 100%; height: 100%" />
+                                </div>
+                                <div>
+                                    <img src="/PageUI/UserInfoIndex/images/gg3.jpg" style="width: 100%; height: 100%" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="picScroll layui-anim layui-anim-up" style="margin-top:12px;">
+                            <ul id="ul_HotGoodss">
+                                @*动态添加热门电子产品数据*@
+                            </ul>
+                            <a class="prev" href="javascript:void(0)"></a>
+                            <a class="next" href="javascript:void(0)"></a>
+                        </div>
+                    </div>
+
+                    <!--右侧广告-->
+                    <div class="advertisement layui-anim layui-anim-upbit">
+                        <h4>活动公告</h4>
+                        <div class="notice_new" style="text-align:left" id="NoticeList">
+                            @*动态添加公告数据*@
+                        </div>
+                        @*分頁*@
+                        <ul class="pagination-sm" id="Notices_FY_ul" style="margin:7px;">
+                            @*动态添加页码*@
+                        </ul>
+                        <a href="#">
+                            <div class="notice_img">
+                                <img src="~/Img/IndexImg/index_qh1.jpg" class="img1">
+                                <img src="~/Img/IndexImg/index_qh2.jpg" class="img2">
+                            </div>
+                        </a>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--多图轮播-->
+        <div class="lunbo" style="margin-top:400px;">
+            <div class="title wow bounceInUp  layui-anim layui-anim-scaleSpring" style="width:400px;">热门的电脑维修店铺</div>
+            <div class="picScroll  layui-anim layui-anim-upbit">
+                <ul id="ul_HotShopTJ">
+                    @*动态添加热门商店数据*@
+                </ul>
+                <button type="button" class="prev"></button>
+                <a class="next" href="javascript:void(0)"></a>
+            </div>
+        </div>
+
+        <!--导航+筛选栏+展示栏-->
+        <div class="cation-content layui-anim layui-anim-upbit">
+            <div class="cation-middle">
+                <!--导航-->
+                <div style="width:100%">
+                    <!--搜索栏-->
+                    <div class="searchk center input-group" style="margin-top:10px;">
+                        <div class="sjhcp">
+                            <!--left-->
+                            <div class="sjhcp_in">
+                                <span>
+                                    店铺
+                                    <img src="~/PageUI/UserInfoIndex/images/jiantou.png" />
+                                </span>
+                                <div class="little_list">
+                                    <em onclick="$('#SearchType').val(1);GetShopAndSetFY();">店铺</em>
+                                    <em onclick="$('#SearchType').val(0); GetGoodsAndSetFY();">电子产品</em>
+                                </div>
+                            </div>
+                            <!--right-->
+                            <div class="jiantou"></div>
+                        </div>
+                        <input type="text" id="SearchType" value="1" hidden />
+                        <input id="search_source" type="text" value="请输入店铺名或电子产品" onfocus="if (value == '请输入店铺名或电子产品') { value = '' }" onblur="    if (value == '') { value = '请输入店铺名或电子产品' }" onkeyup="GetSearchTip($('#search_source').val(), $('#SearchType').val())" />
+                        <div class="ssls" onclick="BtnSearchClick($('#search_source').val(), parseInt($('#SearchType').val()),1)" id="search"><img src="/PageUI/UserInfoIndex/images/fangdajing.png" /></div>
+                    </div>
+
+                    <!--搜索历史-->
+                    <div style="text-align:center;">
+                        <a>搜索历史</a>
+                        <a id="empty">清除历史</a>
+                        <br />
+                        <div id="history">
+
+                        </div>
+                    </div>
+                </div>
+
+                <!--筛选栏-->
+                <div>
+                    <dl class="cation-list">
+                        <dt>分类</dt>
+                        <dd>
+                            <a href="javascript:(0)" rel="" name="mode" class="all on">全部</a>
+                            <a href="javascript:(0)" rel="笔记本" name="mode" class="default">笔记本</a>
+                            <a href="javascript:(0)" rel="硬件" name="mode" class="default">硬件</a>
+                            <a href="javascript:(0)" rel="台式电脑" name="mode" class="default">台式电脑</a>
+                            <a href="javascript:(0)" rel="主机" name="mode" class="default">主机</a>
+                            <a href="javascript:(0)" rel="键盘" name="mode" class="default">键盘</a>
+                            <a href="javascript:(0)" rel="鼠标" name="mode" class="default">鼠标</a>
+                        </dd>
+                    </dl>
+                    <dl class="cation-list">
+                        <dt>营业</dt>
+                        <dd>
+                            <a href="javascript:(0)" rel="" name="system" class="all on">全部</a>
+                            <a href="javascript:(0)" rel="6:00-7:00" name="system" class="default">6:00-7:00</a>
+                            <a href="javascript:(0)" rel="7:00-8:00" name="system" class="default">7:00-8:00</a>
+                            <a href="javascript:(0)" rel="8:00-12:00" name="system" class="default">8:00-12:0</a>
+                            <a href="javascript:(0)" rel="12:00-1:00" name="system" class="default">12:00-1:00</a>
+                            <a href="javascript:(0)" rel="1:00-18:00" name="system" class="default">1:00-18:00</a>
+                            <a href="javascript:(0)" rel="18:00-22:00" name="system" class="default">18:00-22:00</a>
+                            <a href="javascript:(0)" rel="22:00-00:00" name="system" class="default">22:00-00:00</a>
+                        </dd>
+                    </dl>
+                    <dl class="cation-list">
+                        <dt>价格</dt>
+                        <dd>
+                            <a href="javascript:(0)" rel="" name="price" class="all on">全部</a>
+                            <a href="javascript:(0)" rel="0 - 100" name="price" class="default">0 - 100</a>
+                            <a href="javascript:(0)" rel="100 - 200" name="price" class="default">100 - 200 </a>
+                            <a href="javascript:(0)" rel="200 - 300" name="price" class="default">200 - 300 </a>
+                            <a href="javascript:(0)" rel="300 - 400" name="price" class="default">300 - 400</a>
+                            <a href="javascript:(0)" rel="500 - 1000" name="price" class="default">500 - 1000</a>
+                            <a href="javascript:(0)" rel="500 - 1000" name="price" class="default">1000↑</a>
+                        </dd>
+                    </dl>
+                    <dl class="cation-list">
+                        <dt>地点</dt>
+                        <dd>
+                            <div id="SelectCity" style="height:25px;width:200px;border:dashed 1px #0082df;margin-top:10px;margin-left:15px;color:#0082df;text-align:center">点击选择城市</div>
+                        </dd>
+                    </dl>
+                    <!--排序-->
+                    <div>
+                        <ul class="SXL_PX">
+                            <li><a>最新</a></li>
+                            <li><a>推荐</a></li>
+                            <li><a>关注度</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!--展示栏-->
+                <div class="content" style="margin-top:20px;">
+                    <!-- 瀑布流样式开始 -->
+                    <div class="waterfull clearfloat" id="Waterfull_ShopData">
+                        <ul>
+                            @*动态添加商店|商品数据*@
+                            @*<li class="item">
+                                <a href="#" class="a-img">
+                                    <img src="~/PageUI/WaterfallDataUi/images/t8.jpg" alt="">
+                                </a>
+                                <h4 class="li-title" title="手把手教你用css3来创建loading动画(二)">手把手教你用css3来创建loading动画(二)</h4>
+                                <p class="description">HTML 5以前的标准由于考虑到浏览器安全问题并不允许直接跨域通信并不允许直接跨域通信并不允许直接跨域通信，于...</p>
+                                <div class="qianm clearfloat">
+                                    <span class="sp1"><b>688</b>浏览</span>
+                                    <span class="sp2">标题</span>
+                                    <span class="sp3">2小时前&nbsp;By</span>
+                                </div>
+                            </li>
+                            *@
+                        </ul>
+                    </div>
+                    <!-- loading按钮自己通过样式调整 -->
+                    <div id="imloading" style="width:150px;height:30px;line-height:30px;font-size:16px;text-align:center;border-radius:3px;opacity:0.7;background:#000;margin:10px auto 30px;color:#fff;display:none">
+                        <i class="layui-icon layui-icon-loading"></i> 加载更多中
+                    </div>
+                    <div style="text-align:center;">
+                        <ul class="pagination pagination-sm" id="Waterfall_FY_ul">
+                            @*动态添加数据*@
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="allmap"></div>
+
+        <!--雪花特效框-->
+        <div class="snow-container"></div>
+    </div>
+
+</body>
+</html>
+<script type="text/javascript" src="~/PageUI/MyInfoIndexUi/js/jquery.min.js" charset="utf-8"></script>
+<script type="text/javascript" src="~/PageUI/MyInfoIndexUi/js/jquery.SuperSlide.2.1.js"></script>
+<script type="text/javascript" src="~/PageUI/MyInfoIndexUi/js/bootstrap.min.js" charset="utf-8"></script>
+<script type="text/javascript" src="~/PageUI/UserInfoIndex/js/index2.js" charset="utf-8"></script>
+<script type="text/javascript" src="~/layui/layui.all.js" charset="utf-8"></script>
+<script type="text/javascript" src="~/PageUI/IndexUI/js/Index.js"></script>
+<script type="text/javascript" src="~/PageUI/MyInfoIndexUi/js/swiper.min.js" charset="utf-8"></script>
+<script type="text/javascript" src="~/PageUI/MyInfoIndexUi/js/wow.min.js"></script>
+  <!--3D飘雪花特效-->
+@*<script type="text/javascript" src="http://apps.bdimg.com/libs/jquery/1.7.2/jquery.min.js"></script>*@
+<script type="text/javascript" src="/Scripts/snow.js"></script>
+
+<!--三级城市选择-->
+<script src="~/PageUI/CitySelectUI/js/cityJson.js"></script>
+<script src="~/PageUI/CitySelectUI/js/citySet.js"></script>
+<script src="~/PageUI/CitySelectUI/js/common.js"></script>
+<script src="~/PageUI/CitySelectUI/js/Popt.js"></script>
+
+<!--搜索框历史记录-->
+<script src="~/PageUI/SearchUI/搜索框历史记录功能/js/Search.js"></script>
+<!--搜索框自动提示-->
+@*<script src="//apps.bdimg.com/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>*@
+<script src="~/Scripts/jquery-ui-1.10.4.min.js"></script>
+
+<!--WaterfallDataUi-->
+<script src="~/PageUI/WaterfallDataUi/js/jQeasing.js"></script>
+<script src="~/PageUI/WaterfallDataUi/js/jquery.masonry.min.js"></script>
+<script src="~/PageUI/WaterfallDataUi/js/jQueryColor.js"></script>
+
+
+
+
+
+
+
+
+
+

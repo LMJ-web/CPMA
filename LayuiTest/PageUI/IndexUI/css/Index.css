@@ -1,0 +1,86 @@
+﻿.nav li a {
+    /*设置导航字体大小*/
+    font-size: 16px;
+}
+
+.center {
+    margin: 0 auto;
+}
+
+.mydiv {
+    width: 250px;
+    height: auto;
+    border: #909090 1px solid;
+    background: transparent;
+    color: #333;
+    filter: progid:DXImageTransform.Microsoft.Shadow(color=#909090,direction=120,strength=4);
+    -moz-box-shadow: 2px 2px 10px #909090;
+    -webkit-box-shadow: 2px 2px 10px #909090;
+    box-shadow: 2px 2px 10px #909090;
+}
+
+div dl dd {
+    margin-top: 20px;
+}
+
+/* 搜索框 */
+#search_source {
+    width: 450px;
+    height: 38px;
+    background: transparent;
+    float: left;
+    font-size: 16px;
+    color: #adadad;
+    text-indent: 16px;
+    line-height: 40px;
+}
+
+/* 筛选栏的排序 */
+.SXL_PX {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #0082df;
+}
+
+    .SXL_PX li {
+        float: left;
+    }
+
+        .SXL_PX li a {
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 0 16px;
+            text-decoration: none;
+        }
+
+            /*鼠标移动到选项上修改背景颜色 */
+            .SXL_PX li a:hover {
+                background-color: #1E9FFF;
+            }
+
+.ShowDiv {
+    height: 800px;
+    width: auto;
+}
+
+@media only screen and (max-width: 390px) {
+    div .cation-middle {
+        padding: 0;
+    }
+
+    div .cation-content .content {
+        margin: 0;
+    }
+
+    div #search{
+        width:20%;
+
+    }
+
+        div #search img {
+            width:40%;
+        }
+}

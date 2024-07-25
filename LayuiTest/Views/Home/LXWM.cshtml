@@ -1,0 +1,65 @@
+﻿@{
+    ViewBag.Title = "联系我们";
+}
+
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+<link rel="stylesheet" type="text/css" href="~/PageUI/MyInfoIndexUi/css/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" href="~/PageUI/MyInfoIndexUi/css/style.css" />
+<link rel="stylesheet" type="text/css" href="~/PageUI/MyInfoIndexUi/css/map.css" />
+
+<!--联系我们-->
+<div id="LXWM">
+    @*页面标志*@
+    <input type="text" id="YM" value="LXWM" hidden=hidden />
+    <div class="contract wrap">
+        <div class="title">@ViewBag.Title</div>
+        <div class="contractlist">
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <div class="juzhong">
+                        <div>
+                            <div class="imgDiv"><img src="~/PageUI/MyInfoIndexUi/img/email.png" class="email fl" /></div>
+                            <span>E-mail &nbsp;&nbsp;&nbsp;: l445298034@163.com</span>
+                        </div>
+                        <div>
+                            <div class="imgDiv">
+                                <img src="~/PageUI/MyInfoIndexUi/img/tel.png" class=" fl" />
+                            </div>
+                            <span>联系电话 : 150182***32</span>
+                        </div>
+                        <div>
+                            <div class="imgDiv">
+                                <img src="~/PageUI/MyInfoIndexUi/img/hezuo.png" class=" fl" />
+                            </div>
+                            <span>商务合作 : QQ ******* </span>
+                        </div>
+                        <div>
+                            <div class="imgDiv">
+                                <img src="~/PageUI/MyInfoIndexUi/img/addr.png" class=" fl" />
+                            </div>
+                            <span>公司地址 : 东莞市</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="map">
+                <img src="~/PageUI/MyInfoIndexUi/img/map.png" />
+                <div class="dingwei">
+                    <img src="~/PageUI/MyInfoIndexUi/img/dingwei.png" />
+                </div>
+                <div class="addr-name" style="background: url(/PageUI/MyInfoIndexUi/img/addr-bg.png)">中国·东莞·DongKeng</div>
+            </div>
+    </div>
+</div>
+<script src="~/PageUI/MyInfoIndexUi/js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="~/PageUI/MyInfoIndexUi/js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+    $(".dingwei").hover(function () {
+        $(this).next(".addr-name").toggle();
+    });
+</script>
+
+

@@ -1,0 +1,293 @@
+﻿
+@{
+    ViewBag.Title = "MyInfoIndex";
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <title>星辰电脑维修-首页</title>
+    <link rel="stylesheet" type="text/css" href="~/PageUI/MyInfoIndexUi/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="~/PageUI/MyInfoIndexUi/css/swiper.min.css" />
+    <link rel="stylesheet" type="text/css" href="~/PageUI/MyInfoIndexUi/css/style.css" />
+    <link rel="stylesheet" type="text/css" href="~/PageUI/MyInfoIndexUi/css/animate.min.css">
+
+</head>
+<body>
+    <!--首页-->
+    <div id="MyInfoIndex" style="">
+        @*页面标志*@
+        <input type="text" id="ZSWM" value="ZSWM" hidden />
+        <!-- Swiper -->
+        <div class="swiper-container" style="text-align: center;">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide" style="background: url(/PageUI/MyInfoIndexUi/img/hongpei1.jpg) no-repeat; background-size: 100% 100%;"></div>
+                <div class="swiper-slide" style="background: url(/PageUI/MyInfoIndexUi/img/hongpei2.jpg) no-repeat; background-size: 100% 100%; "></div>
+                <div class="swiper-slide" style="background: url(/PageUI/MyInfoIndexUi/img/hongpei3.jpg) no-repeat; background-size: 100% 100%; "></div>
+                @*<div class="swiper-slide" style="background: url(http://www.17sucai.com/preview/855854/2018-05-31/yuandong/img/banner.png );background-size: 100% 100%;"></div>*@
+            </div>
+            <!-- Add Pagination -->
+            <div class="swiper-pagination swiper-pagination-white"></div>
+            <!-- Add Arrows -->
+            <div class="swiper-button-next swiper-button-white"></div>
+            <div class="swiper-button-prev swiper-button-white"></div>
+        </div>
+        <!--多图轮播-->
+        <div class="lunbo">
+            <div class="title2 wow bounceInUp">我们参与的项目</div>
+            <div class="picScroll">
+                <ul>
+                    <li>
+                        <a target="_blank" href="javascript:0;">
+                            <img src="~/PageUI/MyInfoIndexUi/img/lunbo1.png" />
+                            <div class="img-text">大型海战战场“潜龙之渊”上线，全民开战！</div>
+                        </a>
+                    </li>
+                    <li>
+                        <a target="_blank" href="javascript:0;">
+                            <img src="~/PageUI/MyInfoIndexUi/img/lunbo2.png" />
+                            <div class="img-text">天刀嘲天宫《一人之战》视频首发 同名专辑上架QQ音乐</div>
+                        </a>
+                    </li>
+                    <li>
+                        <a target="_blank" href="###">
+                            <img src="~/PageUI/MyInfoIndexUi/img/lunbo3.png" />
+                            <div class="img-text">懒人攻略 如何刷完一周胜负令</div>
+                        </a>
+                    </li>
+                    <li>
+                        <a target="_blank" href="###">
+                            <img src="~/PageUI/MyInfoIndexUi/img/lunbo4.png" />
+                            <div class="img-text">《王者荣耀》魔性H5上线，五军对决等你来战</div>
+                        </a>
+                    </li>
+                    <li>
+                        <a target="_blank" href="###">
+                            <img src="~/PageUI/MyInfoIndexUi/img/lunbo5.png" />
+                            <div class="img-text">超高期待！玩家Coser作品获《绝地求生 全军出击》官方点赞</div>
+                        </a>
+                    </li>
+                    <li>
+                        <a target="_blank" href="###">
+                            <img src="~/PageUI/MyInfoIndexUi/img/lunbo6.png" />
+                            <div class="img-text">揭幕战RNGvsIG LPL春季赛1月15日正式开赛</div>
+                        </a>
+                    </li>
+                </ul>
+                <a class="prev" href="javascript:void(0)"></a>
+                <a class="next" href="javascript:void(0)"></a>
+            </div>
+            <a href="###"><div class="more">更多作品</div></a>
+        </div>
+        <!--关于我们-->
+        <div class="aboutUs">
+            <div class="wrap">
+                <div class="title wow bounceInUp">关于我们</div>
+                <div class="text wow slideInDown">
+                    <span class="ccf0f32">广州袁动动漫设计有限公司（YD ART），致力于CG美术概念设计及三维影视游戏视觉开发制作</span>
+                    <span>其团队现由创办人袁杰联合著名CG艺术家肖壮悦以及XRCGTEAM（<a href="http://www.xrcgteam.com">http://www.xrcgteam.com</a>）成员和各游戏、影视、动漫业内资深艺术家所组成，</span>
+                    <span>为国内外众多项目提供优质概念设计、原画设定、美宣插画、次世代3D、GUI、动作特效等外包服务。</span>
+                    <span>曾参与《星际争霸》《上古卷轴》《英雄联盟》《战神》《三国无双》《梦幻西游》《LOC》《鬼吹灯》《长城》等国内外大型游戏影视项目视觉美术开发制作</span>
+                </div>
+                <div class="row">
+                    <div class="col-xs-6 col-sm-3">
+                        <div class="">
+                            <h3 class="timer count-title" id="count-number" data-to="150" data-speed="1500"></h3>员工
+                        </div>
+                    </div>
+                    <div class="col-xs-6 col-sm-3">
+                        <div class="">
+                            <h3 class="timer count-title" id="count-number" data-to="100" data-speed="1500"></h3>客户
+                        </div>
+                    </div>
+                    <div class="col-xs-6 col-sm-3">
+                        <div class="">
+                            <h3 class="timer count-title" id="count-number" data-to="200" data-speed="1500"></h3>项目
+                        </div>
+                    </div>
+                    <div class="col-xs-6 col-sm-3">
+                        <div class="">
+                            <h3 class="timer count-title" id="count-number" data-to="6" data-speed="1500"></h3>周年
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--他们信任我们-->
+        <div class="believe">
+            <div class="wrap">
+                <div class="title wow bounceInUp">他们信任我们</div>
+                <div class="partnerList">
+                    <ul>
+                        <a href="javascript:0;">
+                            <li>
+                                <img src="~/PageUI/MyInfoIndexUi/img/about_01.jpg" />
+                            </li>
+                        </a>
+                        <a href="javascript:0;">
+                            <li>
+                                <img src="~/PageUI/MyInfoIndexUi/img/about_02.jpg" />
+                            </li>
+                        </a>
+                        <a href="###">
+                            <li>
+                                <img src="~/PageUI/MyInfoIndexUi/img/about_03.jpg" />
+                            </li>
+                        </a>
+                        <a href="###">
+                            <li>
+                                <img src="~/PageUI/MyInfoIndexUi/img/about_04.jpg" />
+                            </li>
+                        </a>
+                        <a href="###">
+                            <li>
+                                <img src="~/PageUI/MyInfoIndexUi/img/about_05.jpg" />
+                            </li>
+                        </a>
+                        <a href="###">
+                            <li>
+                                <img src="~/PageUI/MyInfoIndexUi/img/about_06.jpg" />
+                            </li>
+                        </a>
+                        <a href="###">
+                            <li>
+                                <img src="~/PageUI/MyInfoIndexUi/img/about_07.jpg" />
+                            </li>
+                        </a>
+                        <a href="###">
+                            <li>
+                                <img src="~/PageUI/MyInfoIndexUi/img/about_08.jpg" />
+                            </li>
+                        </a>
+                        <a href="###">
+                            <li>
+                                <img src="~/PageUI/MyInfoIndexUi/img/about_09.jpg" />
+                            </li>
+                        </a>
+                        <a href="###">
+                            <li>
+                                <img src="~/PageUI/MyInfoIndexUi/img/about_10.jpg" />
+                            </li>
+                        </a>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!--我们做什么-->
+        <div class="wedo">
+            <div class="wrap">
+                <div class="title wow bounceInUp">我们做什么</div>
+                <div class="text wow slideInDown">
+                    <span class="ccf0f32 f18">ACG领域视觉美术外包方案解决专家</span>
+                    <span>我们提供2D、3D、次世代游戏美术全流程外包服务，包括美术风格预研、整包定制、美术咨询等服务</span>
+                </div>
+                <div class="row dolist">
+                    <a href="###">
+                        <div class="col-xs-6 col-sm-4 col-md-2 wow bounceInLeft" data-wow-delay="1.5s">
+                            <img src="~/PageUI/MyInfoIndexUi/img/doimg_1.png" />手游
+                        </div>
+                    </a>
+                    <a href="###">
+                        <div class="col-xs-6 col-sm-4 col-md-2 wow bounceInLeft " data-wow-delay="1s">
+                            <img src="~/PageUI/MyInfoIndexUi/img/doimg_2.png" />页游
+                        </div>
+                    </a>
+                    <a href="###">
+                        <div class="col-xs-6 col-sm-4 col-md-2 wow bounceInLeft " data-wow-delay="0.5s">
+                            <img src="~/PageUI/MyInfoIndexUi/img/doimg_3.png" />端游
+                        </div>
+                    </a>
+                    <a href="###">
+                        <div class="col-xs-6 col-sm-4 col-md-2 wow bounceInRight " data-wow-delay="0.5s">
+                            <img src="~/PageUI/MyInfoIndexUi/img/doimg_4.png" />次世代
+                        </div>
+                    </a>
+                    <a href="###">
+                        <div class="col-xs-6 col-sm-4 col-md-2 wow bounceInRight " data-wow-delay="1s">
+                            <img src="~/PageUI/MyInfoIndexUi/img/doimg_5.png" />单机
+                        </div>
+                    </a>
+                    <a href="###">
+                        <div class="col-xs-6 col-sm-4 col-md-2 wow bounceInRight " data-wow-delay="1.5s">
+                            <img src="~/PageUI/MyInfoIndexUi/img/doimg_6.png" />影视
+                        </div>
+                    </a>
+                </div>
+                <div class="text-list wow bounceInDown">
+                    <ul>
+                        <li>
+                            <a href="###">角色原画设计</a>
+                            <a href="###">场景原画设计</a>
+                            <a href="###">UI设计</a>
+                        </li>
+                        <li>
+                            <a href="###">肖像绘制</a>
+                            <a href="###">道具绘制</a>
+                            <a href="###">图标绘制</a>
+                        </li>
+                        <li>
+                            <a href="###">美宣</a>
+                            <a href="###">卡牌绘制</a>
+                            <a href="###">2D场景整合</a>
+                        </li>
+                        <li>
+                            <a href="###">3DMAX角色模型</a>
+                            <a href="###">3DMAX场景模型</a>
+                            <a href="###">次世代模型、贴图</a>
+                        </li>
+                        <li>
+                            <a href="###">3DMAX动画</a>
+                            <a href="###">3DMAX特效</a>
+                            <a href="###">3转2绘制</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+</body>
+</html>
+<script src="~/PageUI/MyInfoIndexUi/js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="~/PageUI/MyInfoIndexUi/js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="~/PageUI/MyInfoIndexUi/js/jquery.SuperSlide.2.1.js" type="text/javascript"></script>
+
+<script src="~/PageUI/MyInfoIndexUi/js/numberAdd.js" type="text/javascript" charset="utf-8"></script>
+<script src="~/PageUI/MyInfoIndexUi/js/swiper.min.js" type="text/javascript" charset="utf-8"></script>
+
+<script type="text/javascript" src="~/PageUI/MyInfoIndexUi/js/wow.min.js"></script>
+@*首页*@
+<script type="text/javascript">
+    //预加载初始化
+    $(function () {
+
+    })
+    //多图轮播
+    jQuery(".picScroll").slide({ mainCell: "ul", effect: "leftLoop", vis: 6, scroll: 1, autoPage: true, switchLoad: "_src", autoPlay: true });
+
+    //banner轮播
+    var swiper = new Swiper('.swiper-container', {
+        spaceBetween: 30,
+        //	      effect: 'fade',
+        loop: true,
+        pagination: {
+            el: '.swiper-pagination',
+            clickable: true,
+        },
+        navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+        },
+    });
+
+    //鼠标滚动特效
+    new WOW().init();
+</script>
+
+
+
+

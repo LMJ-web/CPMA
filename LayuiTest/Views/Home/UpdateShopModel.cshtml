@@ -1,0 +1,212 @@
+﻿@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>编辑商店的模板</title>
+    <link rel="stylesheet" type="text/css" href="~/layui/css/layui.css" />
+    <style>
+        .hide {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    @{
+        var shop = ViewBag.Shop;
+        if (shop != null)
+        {
+            <div class="layui-form layui-form-pane" style="margin:23px;" >
+                <div class="layui-form-item">
+                    <label class="layui-form-label">商店名</label>
+                    <div class="layui-input-inline">
+                        <input type="text" placeholder="商店名" class="layui-input ShopName" value="@ViewBag.Shop.Data.ShopName">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">联系人</label>
+                    <div class="layui-input-inline">
+                        <input type="text" placeholder="联系人" lay-verify="required" class="layui-input ShopContact" value="@ViewBag.Shop.Data.ShopContact">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">联系电话</label>
+                    <div class="layui-input-inline">
+                        <input type="text" placeholder="联系电话" class="layui-input ShopPhone" value="@ViewBag.Shop.Data.ShopPhone">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">最低价</label>
+                    <div class="layui-input-inline">
+                        <input type="text" placeholder="最低价" class="layui-input MinPrice" value="@ViewBag.Shop.Data.MinPrice">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">最高价</label>
+                    <div class="layui-input-inline">
+                        <input type="text" placeholder="最高价" class="layui-input MaxPrice" value="@ViewBag.Shop.Data.MaxPrice">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">商店地址</label>
+                    <div class="layui-input-inline">
+                        <input type="text" placeholder="商店地址" class="layui-input ShopAddress" value="@ViewBag.Shop.Data.ShopAddress">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">详细地址</label>
+                    <div class="layui-input-inline">
+                        <input type="text" placeholder="商店详细地址" class="layui-input ShopDAddress" value="@ViewBag.Shop.Data.ShopDAddress">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">热门状态</label>
+                    <div class="layui-input-inline">
+                        <input type="text" placeholder="热门状态" class="layui-input HotState" value="@ViewBag.Shop.Data.HotState">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">封面图</label>
+                    <div class="layui-upload">
+                        <button class="layui-btn layui-btn-normal" id="ShopModifyInfoForm_FMImgSeleBtn">封面图上传</button>
+                        <div class="layui-upload-list">
+                            <input id="ShopModifyInfoForm_FMImg_input" type="text" value="@ViewBag.Shop.Data.ShopFMImgPath" hidden />
+                            <blockquote class="layui-elem-quote layui-quote-nm" style="margin-top: 10px;">
+                                <img id="ShopModifyInfoForm_FMImg" class="layui-upload-img" style="width:100px;height:100px;" src="@ViewBag.Shop.Data.ShopFMImgPath">
+                                <p id="demoText"></p>
+                                <div class="layui-upload-list" id="demo"></div>
+                            </blockquote>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label" style="width:-webkit-fill-available">商店简介</label>
+                    <textarea type="text" class="layui-textarea ShopIntroduce" placeholder="@ViewBag.Shop.Data.ShopIntroduce">@ViewBag.Shop.Data.ShopIntroduce</textarea>
+                </div>
+                <div class="layui-form-item" style="display:none">
+                    <label class="layui-form-label">ShopId</label>
+                    <div class="layui-input-inline">
+                        <input id="ShopId" type="text" class="layui-input ShopId" value="@ViewBag.Shop.Data.ShopId">
+                    </div>
+                </div>
+            </div>
+            <div class="layui-form-item layui-form-text">
+                <div style="text-align:center;">
+                    <button class="layui-btn layui-btn-normal layui-btn-radius" onclick="ModifyShopInfo()">确认</button>
+                    <button class="layui-btn layui-btn-danger  layui-btn-radius" id="CloseIframe">取消</button>
+                </div>
+            </div>
+        }
+    }
+</body>
+</html>
+<script src="~/PageUI/MyInfoIndexUi/js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="~/layui/layui.js" type="text/javascript" charset="utf-8"></script>
+<script>
+    var partPhone = /^[0-9]{11}$/;
+    var partPrice = /^[1-9]{1}[0-9]*$/;
+    var partMinPrice = /^[0-9]*$/;
+    var partHotState = /^[01]{1}$/;
+    //关闭点击事件的绑定
+    $('#CloseIframe').click(function () {
+        //注意：parent 是 JS 自带的全局对象，可用于操作父页面
+        var index = parent.layer.getFrameIndex(window.name); //获取窗口索引
+        parent.layer.close(index);
+    });
+
+    $(function () {
+        //设置封面图
+        if ($("#ShopModifyInfoForm_FMImg_input").val() == "" || $("#ShopModifyInfoForm_FMImg_input").val() == null) {
+            $("#ShopModifyInfoForm_FMImg").attr("src", "/Img/DefaultImg/DFMImg.jpg" + '?' + Math.random());
+
+        } else {
+            $("#ShopModifyInfoForm_FMImg").attr("src", $("#ShopModifyInfoForm_FMImg_input").val() + '?' + Math.random());
+        }
+        //文件上传
+        layui.use('upload', function () {
+            var $ = layui.jquery
+            , upload = layui.upload;
+            //商店封面图片上传
+            var shopFMupload = upload.render({
+                elem: '#ShopModifyInfoForm_FMImgSeleBtn'
+              , url: "/Shop/UploadShopFMImg"
+              , method: 'post'
+              , accept: "images"
+              , before: function (obj) {
+                  this.data = { "UserName": "", "ShopId": $("#ShopId").val() };//额外参数关键代码
+              }
+              , done: function (data) {
+                  if (data == true) {
+                      $("#ShopModifyInfoForm_FMImg").attr("src", $("#ShopModifyInfoForm_FMImg_input").val() + '?' + Math.random());
+                      return layer.msg("封面已上传成功！");
+                  } else {
+                      //如果上传失败
+                      return layer.msg('上传失败');
+                  }
+              }
+              , error: function () {
+                  //失败状态，并实现重传
+                  var demoText = $('#demoText');
+                  demoText.html('<span style="color: #FF5722;">上传失败</span> <br/><a class="layui-btn layui-btn-mini demo-reload layui-btn-normal">重试</a>');
+                  demoText.find('.demo-reload').on('click', function () {
+                      uploadInst.upload();
+                  });
+              }
+            });
+        });
+    });
+
+    //修改商店信息
+    function ModifyShopInfo() {
+        var ShopId = $(".ShopId").val();
+        var ShopName = $(".ShopName").val();
+        var ShopContact = $(".ShopContact").val();
+        var ShopPhone = $(".ShopPhone").val();
+        var MinPrice = $(".MinPrice").val();
+        var MaxPrice = $(".MaxPrice").val();
+        var ShopAddress = $(".ShopAddress").val();
+        var ShopDAddress = $(".ShopDAddress").val();
+        var ShopIntroduce = $(".ShopIntroduce").val();
+        var HotState = $(".HotState").val();
+        if (!partPhone.test(ShopPhone)) {
+            parent.layer.msg("请输入正确格式的手机号码！");
+        } else if (!partMinPrice.test(MinPrice) || !partPrice.test(MaxPrice)) {
+            parent.layer.msg("请输入正确的价钱！");
+        } else if (!partHotState.test(HotState)) {
+            parent.layer.msg("请输入正确的热门状态（0|1）！");
+        }
+        $.ajax({
+            url: "/Admin/ModifyShopInfo",
+            dataType: "json",
+            type: "post",
+            asyns: false,
+            data: {
+                ShopId: ShopId,
+                ShopName: ShopName,
+                ShopContact: ShopContact,
+                ShopPhone: ShopPhone,
+                MinPrice: MinPrice,
+                MaxPrice: MaxPrice,
+                ShopAddress: ShopAddress,
+                ShopDAddress: ShopDAddress,
+                ShopIntroduce: ShopIntroduce,
+                HotState: HotState,
+            },
+            success: function (data) {
+                if (data == null || data == "") {
+                    parent.layer.msg("更新异常！");
+                } else if (data == true) {
+                    parent.layer.msg("更新成功！");
+                    //parent.layer.close(index);
+                    setTimeout(function () {
+                        parent.location.reload();
+                    }, 500);
+                } else {
+                    parent.layer.msg("更新失败！");
+                }
+            }
+        });
+    }
+</script>

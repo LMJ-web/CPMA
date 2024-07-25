@@ -1,0 +1,79 @@
+﻿@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>添加商品的模板</title>
+    <link rel="stylesheet" type="text/css" href="~/layui/css/layui.css" />
+</head>
+<body>
+    <form class="layui-form layui-form-pane" style="margin:10px;" action="#">
+        <div class="layui-form-item" >
+            <label class="layui-form-label">商品名</label>
+            <div class="layui-input-inline">
+                <input id="GoodsName" type="text" placeholder="商品名" class="layui-input" value="">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">商店</label>
+            <div class="layui-input-inline">
+                <select id="GoodsModel_ShopSel" lay-verify="required" lay-search=""></select>
+            </div>
+        </div>
+        <div class="layui-form-item" style="margin-top:5px">
+            <label class="layui-form-label">类别</label>
+            <div class="layui-input-inline">
+                <select id="GoodsModel_GoodsCategorySel" lay-verify="required" lay-search=""></select>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">价格</label>
+            <div class="layui-input-inline">
+                <input id="GoodsPrice" type="text" placeholder="价格" class="layui-input" value="">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">促销价</label>
+            <div class="layui-input-inline">
+                <input id="GoodsMinPrice" type="text" placeholder=" 促销价" class="layui-input" value="0">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">热门状态</label>
+            <div class="layui-input-inline">
+                <input id="HotState" type="text" placeholder="0或1" class="layui-input " value="0">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label" style="width:-webkit-fill-available">商品简介</label>
+            <textarea id="GoodsIntroduce" type="text" class="layui-textarea " placeholder="请输入简介"></textarea>
+        </div>
+    </form>
+    <div class="layui-form-item layui-form-text">
+        <div style="text-align:center;">
+            <button class="layui-btn layui-btn-normal layui-btn-radius" onclick="SureAdd()">确认</button>
+            <button class="layui-btn layui-btn-danger  layui-btn-radius" id="CloseIframe">取消</button>
+        </div>
+    </div>
+</body>
+</html>
+<script src="~/PageUI/MyInfoIndexUi/js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="~/layui/layui.js" type="text/javascript" charset="utf-8"></script>
+<script src="~/Admin/page/goods/addGoodsModel.js" type="text/javascript" charset="utf-8"></script>
+<script>
+    $(function () {
+
+        $('#CloseIframe').click(function () {
+            //注意：parent 是 JS 自带的全局对象，可用于操作父页面
+            var index = parent.layer.getFrameIndex(window.name); //获取窗口索引
+            parent.layer.close(index);
+        });
+
+        GetGoodsCategoryToSel();
+
+        GetShopToSel();
+    })
+
+</script>

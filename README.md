@@ -29,8 +29,5 @@ namespace CPMA
         }
     }
 }
-```C#
-
-
-
-
+```
+![APP_Start](/LayuiTset/Screenshot/APP_Start.png)

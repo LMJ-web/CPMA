@@ -14,7 +14,7 @@
 
 项目结构
 -
-Global.asx.cs文件是程序的入口文件，项目启动时将会加载APP_Start文件夹下的配置文件。
+* Global.asx.cs文件是程序的入口文件，项目启动时将会加载APP_Start文件夹下的配置文件。
 ```C#
 namespace CPMA
 {
@@ -30,4 +30,4 @@ namespace CPMA
     }
 }
 ```
-![APP_Start](/LayuiTset/Screenshot/APP_Start.png)
+![APP_Start](LayuiTest/Screenshot/APP_Start.png)

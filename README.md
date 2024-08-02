@@ -32,6 +32,10 @@ namespace CPMA
 ```
 ![APP_Start](LayuiTest/Screenshot/APP_Start.png)
 * 使用MVC架构，Controller与View使用框架默认的形式进行匹配。
+  
+![Controllers](LayuiTest/Screenshot/Controllers.png)
+![Views](LayuiTest/Screenshot/Views.png)
+
 
 
   

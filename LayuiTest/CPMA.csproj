@@ -170,12 +170,6 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-<<<<<<< HEAD
-=======
-    <Compile Include="App_Start\Startup.Auth.cs">
-      <SubType>Code</SubType>
-    </Compile>
->>>>>>> origin/main
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\GoodsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -861,10 +855,7 @@
     <Folder Include="PageUI\GoodsIndex\" />
     <Folder Include="PageUI\SearchUI\搜索框历史记录功能\css\" />
     <Folder Include="PageUI\ShopYYIndex\fonts\" />
-<<<<<<< HEAD
     <Folder Include="Screenshot\" />
-=======
->>>>>>> origin/main
     <Folder Include="Views\Part\" />
     <Folder Include="Views\Shop\" />
     <Folder Include="Views\User\" />

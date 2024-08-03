@@ -45,6 +45,10 @@ namespace CPMA
 -
 * 客户端首页
 ![首页](LayuiTest/Screenshot/首页.png)
+* 购物界面
+![购物界面](LayuiTest/Screenshot/购物界面.png)
+* 预约上门服务
+![预约上门服务](LayuiTest/Screenshot/预约上门服务.png)
 
 
   

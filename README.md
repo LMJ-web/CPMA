@@ -61,6 +61,12 @@ namespace CPMA
 ![用户信息管理](LayuiTest/Screenshot/用户信息管理.png)
 * 用户预约管理
 ![顾客预约](LayuiTest/Screenshot/顾客预约.png)
+* 订单管理
+![订单管理](LayuiTest/Screenshot/订单管理.png)
+* 个人信息管理
+![个人信息](LayuiTest/Screenshot/个人信息.png)
+* 商家商品管理
+![商家商品管理](LayuiTest/Screenshot/商家商品管理.png)
 
 
   

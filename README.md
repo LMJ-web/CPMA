@@ -55,8 +55,8 @@ namespace CPMA
 ![管理员商店管理](LayuiTest/Screenshot/管理员商店管理.png)
 * 商品管理
 ![管理员商品管理](LayuiTest/Screenshot/管理员商品管理.png)
-* 预约信息管理
-![顾客预约](LayuiTest/Screenshot/顾客预约.png)
+* 商店预约信息管理
+![商店预约](LayuiTest/Screenshot/商店预约.png)
 
 
   

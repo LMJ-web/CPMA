@@ -36,6 +36,15 @@ namespace CPMA
 ![Controllers](LayuiTest/Screenshot/Controllers.png)
 ![Views](LayuiTest/Screenshot/Views.png)
 
+* View组件会自动加载_ViewStart.cshtml布局文件，该布局文件加载_Layout.cshtml使每个View应用自定义布局
+
+![Layout](LayuiTest/Screenshot/Layout.png)
+
+
+项目截图
+-
+* 客户端首页
+![首页](LayuiTest/Screenshot/首页.png)
 
 
   

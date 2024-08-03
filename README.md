@@ -49,6 +49,14 @@ namespace CPMA
 ![购物界面](LayuiTest/Screenshot/购物界面.png)
 * 预约上门服务
 ![预约上门服务](LayuiTest/Screenshot/预约上门服务.png)
+* 管理员首页
+![管理员首页](LayuiTest/Screenshot/管理员首页.png)
+* 商店管理
+![管理员商店管理](LayuiTest/Screenshot/管理员商店管理.png)
+* 商品管理
+![管理员商品管理](LayuiTest/Screenshot/管理员商品管理.png)
+* 预约信息管理
+![顾客预约](LayuiTest/Screenshot/顾客预约.png)
 
 
   
